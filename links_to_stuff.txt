@@ -1,5 +1,10 @@
 Themes
 https://themeisle.com/demo/?theme=Parallax%20One
+https://blackrockdigital.github.io/startbootstrap-stylish-portfolio/
+https://blackrockdigital.github.io/startbootstrap-creative/
+https://demos.onepagelove.com/html/browny/
+http://preview.uideck.com/items/vanilla/
+http://preview.uideck.com/items/grand/
 
 Other stuff
 https://codepen.io/WebSonick/pen/vjmgu
