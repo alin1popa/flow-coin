@@ -1,6 +1,7 @@
 pragma solidity ^0.4.24;
 
 import "./StandardToken.sol";
+import "./ReentrancyGuard.sol";
 
 /**
  * @title FlowCoin
@@ -61,7 +62,8 @@ contract FlowCoin is StandardToken {
     function placeSellOrder(
         uint256 _ratio,
         uint256 _amount
-    )   public
+    )   external
+        nonReentrant
         returns (bool)
     {
         require(_amount > 0);
@@ -85,7 +87,8 @@ contract FlowCoin is StandardToken {
     function retractSellOrder(
         uint256 _ratio,
         uint256 _amount
-    )   public
+    )   external
+        nonReentrant
         returns (bool)
     {
         require(_amount > 0);
@@ -109,7 +112,8 @@ contract FlowCoin is StandardToken {
     function placeBuyOrder(
         uint256 _ratio,
         uint256 _amount
-    )   public
+    )   external
+        nonReentrant
         payable
         returns (bool)
     {
@@ -134,7 +138,8 @@ contract FlowCoin is StandardToken {
     function retractBuyOrder(
         uint256 _ratio,
         uint256 _amount
-    )   public
+    )   external
+        nonReentrant
         returns (bool)
     {
         require(_amount > 0);
@@ -241,7 +246,8 @@ contract FlowCoin is StandardToken {
     function sellFlow(
         uint256 _amount,
         Order[] _orders
-    )   public
+    )   external
+        nonReentrant
         returns (uint256)
     {
         require(_amount > 0);
@@ -262,7 +268,8 @@ contract FlowCoin is StandardToken {
     function buyFlow(
         uint256 _amount,
         Order[] _orders
-    )   public
+    )   external
+        nonReentrant
         payable
         returns (uint256)
     {
