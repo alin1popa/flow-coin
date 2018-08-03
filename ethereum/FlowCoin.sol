@@ -46,6 +46,14 @@ contract FlowCoin is StandardToken {
     );
     
     /**
+     * @dev Struct used to transmit orders to sell and buy functions
+     */
+    struct Order {
+        uint256 _ratio,
+        address _author
+    }
+    
+    /**
      * @dev Place a sell order in the order book
      * @param _ratio the ratio of FLOW-to-ETH
      * @param _amount the amount of tokens to be sold
@@ -219,6 +227,27 @@ contract FlowCoin is StandardToken {
         }
         
         return _amount - flowToTransfer;
+    }
+    
+    /**
+     * @dev Sell flow by filling buy orders
+     * @param _amount the amount of tokens to be sold
+     * @param _orders the orders to fill
+     */
+    function sellFlow(
+        uint256 _amount,
+        Order[] _orders
+    )   public
+        returns (uint256)
+    {
+        require(_amount > 0);
+        require(_amount <= balances[msg.sender]);
+        
+        for (uint256 i = 0; i < _orders.length && _amount > 0; i++) {
+            _amount = fillBuyOrder(_orders[i]._ratio, _amount, _orders[i]._author);
+        }
+        
+        return _amount;
     }
 }
  
