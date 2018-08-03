@@ -5,8 +5,12 @@ import "./ReentrancyGuard.sol";
 
 /**
  * @title FlowCoin
+ * @dev Token with build-in exchange functionality
  *
- * @dev Token with build-in exchange functionalities
+ * @author Alin Popa
+ * https://github.com/alin1popa/
+ * mailto: TODO
+ *
  * Based on libraries from openzeppelin
  * https://github.com/OpenZeppelin/openzeppelin-solidity/
  * FlowCoin is a Standard ERC-20 Token
@@ -289,4 +293,3 @@ contract FlowCoin is StandardToken {
         return _amount;
     }
 }
- 
