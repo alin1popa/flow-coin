@@ -199,9 +199,10 @@ contract FlowCoin is StandardToken {
     function fillSellOrder(
         uint256 _ratio,
         uint256 _amount,
-        uint256 _seller
+        uint256 _seller,
+        uint256 _payment
     )   private
-        returns (uint256)
+        returns (uint256, uint256)
     {
         uint256 ethToTransfer;
         uint256 flowToTransfer;
@@ -215,9 +216,12 @@ contract FlowCoin is StandardToken {
         
         if (flowToTransfer != 0) {
             ethToTransfer = flowToTransfer.mul(_ratio);
+            if (_payment < ethToTransfer) {
+                ethToTransfer = _payment;
+                flowToTransfer = _payment.div(_ratio);
+            }
             
             sells[orderHash] = sells[orderHash].sub(flowToTransfer);
-            balances[_seller] = balances[_seller].sub(flowToTransfer);
             balances[msg.sender] = balances[msg.sender].add(flowToTransfer);
             
             _seller.transfer(ethToTransfer);
@@ -226,7 +230,7 @@ contract FlowCoin is StandardToken {
             emit Transfer(_seller, msg.sender, flowToTransfer);
         }
         
-        return _amount - flowToTransfer;
+        return (_amount - flowToTransfer, _payment - ethToTransfer);
     }
     
     /**
@@ -245,6 +249,34 @@ contract FlowCoin is StandardToken {
         
         for (uint256 i = 0; i < _orders.length && _amount > 0; i++) {
             _amount = fillBuyOrder(_orders[i]._ratio, _amount, _orders[i]._author);
+        }
+        
+        return _amount;
+    }
+    
+    /**
+     * @dev Buy flow by filling sell orders
+     * @param _amount the amount of tokens to be bought
+     * @param _orders the orders to fill
+     */
+    function buyFlow(
+        uint256 _amount,
+        Order[] _orders
+    )   public
+        payable
+        returns (uint256)
+    {
+        require(_amount > 0);
+        require(msg.value > 0);
+        
+        uint256 payment = msg.value;
+        
+        for (uint256 i = 0; i < _orders.length && _amount > 0 && payment > 0; i++) {
+            (_amount, payment) = fillSellOrder(_orders[i]._ratio, _amount, _orders[i]._author, payment);
+        }
+        
+        if (payment > 0) {
+            msg.sender.transfer(payment);
         }
         
         return _amount;
