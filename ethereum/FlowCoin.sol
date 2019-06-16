@@ -2,6 +2,7 @@ pragma solidity ^0.4.24;
 
 import "./StandardToken.sol";
 import "./ReentrancyGuard.sol";
+import "./SafeMath.sol";
 
 /**
  * @title FlowCoin
@@ -9,7 +10,6 @@ import "./ReentrancyGuard.sol";
  *
  * @author Alin Popa
  * https://github.com/alin1popa/
- * mailto: TODO
  *
  * Based on libraries from openzeppelin
  * https://github.com/OpenZeppelin/openzeppelin-solidity/
@@ -17,6 +17,8 @@ import "./ReentrancyGuard.sol";
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/token/ERC20/StandardToken.sol
  */
 contract FlowCoin is StandardToken {
+    using SafeMath for uint256;
+
     string public constant name = "Flow";
     string public constant symbol = "FLOW";
     uint8 public constant decimals = 18;
