@@ -8,6 +8,7 @@
   </div>
 </template>
 
+<style src="flexboxgrid/dist/flexboxgrid.min.css"></style>
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -28,6 +29,8 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-</style>
 
-<style src="flexboxgrid/dist/flexboxgrid.min.css"></style>
+html,body {
+  padding: 10px;
+}
+</style>
