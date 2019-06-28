@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Dashboard</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
@@ -29,3 +29,5 @@
   color: #42b983;
 }
 </style>
+
+<style src="flexboxgrid/dist/flexboxgrid.min.css"></style>
