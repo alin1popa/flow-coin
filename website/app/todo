@@ -1,0 +1,29 @@
+        Select color palette
+        Post contract to testnet
+        Figure out how to install/use a js eth lib
+        Figure out how to get data from contract
+        Figure out how to push data to contract (call functions)
+        Figure out how to get event history
+        Create lib to interface with contract
+        Lib - GetBalance
+        Lib - GetMyOrders
+        Lib - PlaceOrder
+        Lib - GetOrderbook
+        Lib - GetPriceHistory
+        Connect - GetBalance
+        Connect - GetMyOrders
+        Connect - PlaceOrder
+        Connect - GetOrderbook
+        Connect - GetPriceHistory
+        Implement design / color palette
+        Add navbar
+        Display - my balance
+        Display - 1x my orders
+        Display - my active orders
+        Display - Place order
+        Display - Place market order
+        Display - 1x order from orderbook
+        Display - all orders from orderbook
+        Display - price history
+        Other pages
+[DONE]  Create TODO list
