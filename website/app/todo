@@ -4,9 +4,14 @@
         Figure out how to get data from contract
         Figure out how to push data to contract (call functions)
         Figure out how to get event history
-        Create lib to interface with contract
-        Lib - GetBalance
-        Lib - GetMyOrders
+[DONE]  Create lib to interface with contract
+[DONE]  Lib - GetBalance
+[DONE]  Model - Order
+        Model - PriceHistory
+        Model - OrderRequest
+[DONE]  Model - OrderType
+        Model - OrderRequestType
+[DONE]  Lib - GetMyOrders
         Lib - PlaceOrder
         Lib - GetOrderbook
         Lib - GetPriceHistory
