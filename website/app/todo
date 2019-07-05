@@ -7,14 +7,14 @@
 [DONE]  Create lib to interface with contract
 [DONE]  Lib - GetBalance
 [DONE]  Model - Order
-        Model - PriceHistory
-        Model - OrderRequest
+[DONE]  Model - PriceHistory
+[DONE]  Model - OrderRequest
 [DONE]  Model - OrderType
-        Model - OrderRequestType
+[DONE]  Model - OrderRequestType
 [DONE]  Lib - GetMyOrders
-        Lib - PlaceOrder
-        Lib - GetOrderbook
-        Lib - GetPriceHistory
+[DONE]  Lib - PlaceOrder
+[DONE]  Lib - GetOrderbook
+[DONE]  Lib - GetPriceHistory
         Connect - GetBalance
         Connect - GetMyOrders
         Connect - PlaceOrder
