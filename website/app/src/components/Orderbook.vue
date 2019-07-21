@@ -1,12 +1,16 @@
 <template>
-  <div class="component">
+  <div class="orderbook">
     <p>My balance: {{ balance }}</p>
 
-    <ul id="example-1">
-      <li v-for="order in activeOrders" v-bind:key="order.id">
-        {{ order.address }} wants to {{ order.type }} {{ order.quantity }} at a rate of {{ order.rate }} for a total of {{ order.total }}
-      </li>
-    </ul>
+    <div class="orderbook__list">
+      <div class="orderbook__item" v-for="order in orderbook" v-bind:key="order.id">
+        <span class="orderbook__item__address">{{ order.address }} </span>
+        <span class="orderbook__item__type">{{ order.type + "s" }}</span> 
+        <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
+        <span class="orderbook__item__rate">@ {{ order.rate }} ETH/FC</span>
+        <span class="orderbook__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -24,16 +28,53 @@ export default class Orderbook extends Vue {
     return ContractService.GetBalance();
   }
 
-  get activeOrders(): Order[] {
-    return ContractService.GetActiveOrders();
+  get orderbook(): Order[] {
+    return ContractService.GetOrderbook();
+  }
+
+  public actionClicked(order: Order) {
+    alert(JSON.stringify(order));
   }
 }
 </script>
 
 <style scoped>
-.component {
+.orderbook {
   color: black;
   background-color: navajowhite;
   height: calc(100% - 40px);
+}
+
+.orderbook__list {
+  background-color: lightblue;
+}
+
+.orderbook__item span {
+  display: inline-block;
+}
+
+.orderbook__item__address {
+  background-color: limegreen;
+  width: 35%;
+}
+
+.orderbook__item__type {
+  background-color: rebeccapurple;
+  width: 15%;
+}
+
+.orderbook__item__quantity {
+  background-color: olive;
+  width: 10%;
+}
+
+.orderbook__item__rate {
+  background-color: orchid;
+  width: 25%;
+}
+
+.orderbook__item__action {
+  background-color: teal;
+  width: 15%;
 }
 </style>

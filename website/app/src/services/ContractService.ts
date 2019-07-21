@@ -39,7 +39,7 @@ export class ContractService {
      * @description Gets all active orders for all accounts
      * @returns Order[]
      */
-    public static GerOrderbook(): Order[] {
+    public static GetOrderbook(): Order[] {
         // TODO
         return [
             new Order('0x000001', OrderType.BUY, 70, 0.4),
