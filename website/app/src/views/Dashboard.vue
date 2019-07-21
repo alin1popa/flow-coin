@@ -22,7 +22,7 @@
                     col-sm-6
                     col-md-6 col">
           <Panel color="lightblue" title="asda" class="box" id="panel-myorders">
-            <Orderbook/>
+            <MyOrders/>
           </Panel>
         </div>
       </div>
@@ -43,11 +43,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Panel from '@/components/Panel.vue';
 import Orderbook from '@/components/Orderbook.vue';
+import MyOrders from '@/components/MyOrders.vue';
 
 @Component({
   components: {
     Panel,
     Orderbook,
+    MyOrders,
   },
 })
 export default class Dashboard extends Vue {}

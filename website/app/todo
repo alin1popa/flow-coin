@@ -23,8 +23,8 @@
         Implement design / color palette
         Add navbar
         Display - my balance
-        Display - 1x my orders
-        Display - my active orders
+[DONE]  Display - 1x my orders
+[DONE]  Display - my active orders
         Display - Place order
         Display - Place market order
 [DONE]  Display - 1x order from orderbook

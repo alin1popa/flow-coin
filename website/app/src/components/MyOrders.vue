@@ -1,14 +1,13 @@
 <template>
-  <div class="orderbook">
+  <div class="myorders">
     <p>My balance: {{ balance }}</p>
 
-    <div class="orderbook__list">
-      <div class="orderbook__item" v-for="order in orderbook" v-bind:key="order.id">
-        <span class="orderbook__item__address">{{ order.address }} </span>
-        <span class="orderbook__item__type">{{ order.type + "s" }}</span> 
-        <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
-        <span class="orderbook__item__rate">{{ order.rate }} ETH/FC</span>
-        <span class="orderbook__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
+    <div class="myorders__list">
+      <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id">
+        <span class="myorders__item__type">{{ order.type + "s" }}</span> 
+        <span class="myorders__item__quantity">{{ order.quantity }} FC</span>
+        <span class="myorders__item__rate">@ {{ order.rate }} ETH/FC</span>
+        <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
       </div>
     </div>
 
@@ -23,13 +22,13 @@ import { OrderType } from '@/models/OrderType';
 import { ContractService } from '@/services/ContractService';
 
 @Component
-export default class Orderbook extends Vue {
+export default class MyOrders extends Vue {
   get balance(): number {
     return ContractService.GetBalance();
   }
 
-  get orderbook(): Order[] {
-    return ContractService.GetOrderbook();
+  get myorders(): Order[] {
+    return ContractService.GetActiveOrders();
   }
 
   public actionClicked(order: Order) {
@@ -39,41 +38,41 @@ export default class Orderbook extends Vue {
 </script>
 
 <style scoped>
-.orderbook {
+.myorders {
   color: black;
   background-color: navajowhite;
   height: calc(100% - 40px);
 }
 
-.orderbook__list {
+.myorders__list {
   background-color: lightblue;
 }
 
-.orderbook__item span {
+.myorders__item span {
   display: inline-block;
 }
 
-.orderbook__item__address {
+.myorders__item__address {
   background-color: limegreen;
   width: 35%;
 }
 
-.orderbook__item__type {
+.myorders__item__type {
   background-color: rebeccapurple;
   width: 15%;
 }
 
-.orderbook__item__quantity {
+.myorders__item__quantity {
   background-color: olive;
   width: 10%;
 }
 
-.orderbook__item__rate {
+.myorders__item__rate {
   background-color: orchid;
   width: 25%;
 }
 
-.orderbook__item__action {
+.myorders__item__action {
   background-color: teal;
   width: 15%;
 }
