@@ -56,6 +56,7 @@ export class ContractService {
      * @returns PriceHistory
      */
     public static GetPriceHistory(): PriceHistory {
+        // TODO
         return [
             new PriceAtMoment(new Date(), 0.6, 20),
             new PriceAtMoment(new Date(Date.now() - 24 * 60 * 60 * 1000), 0.5, 25),
