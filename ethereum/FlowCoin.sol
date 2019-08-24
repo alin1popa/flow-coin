@@ -4,6 +4,8 @@ pragma experimental ABIEncoderV2;
 import "./StandardToken.sol";
 import "./ReentrancyGuard.sol";
 import "./SafeMath.sol";
+import "./GeneratedToken.sol";
+
 
 /**
  * @title FlowCoin
@@ -17,12 +19,23 @@ import "./SafeMath.sol";
  * FlowCoin is a Standard ERC-20 Token
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/token/ERC20/StandardToken.sol
  */
-contract FlowCoin is StandardToken, ReentrancyGuard {
+contract FlowCoin is StandardToken, ReentrancyGuard, GeneratedToken {
     using SafeMath for uint256;
 
     string public constant name = "Flow";
     string public constant symbol = "FLOW";
-    uint8 public constant decimals = 18;
+    uint256 public constant decimals = 4;
+    uint256 public totalSupply_ = 0;
+    
+    uint256 public constant supplyLimit = 1000000*0.90*10**decimals;
+    uint256 public generationRate = 10;
+    
+    // premine 10% of max supply limit to owner's address
+    constructor() public {
+        totalSupply_ = 1000000*0.10*10**decimals;
+        balances[msg.sender] = 1000000*0.10*10**decimals;
+    }
+    
     
     mapping (bytes32 => uint256) internal sells;
     mapping (bytes32 => uint256) internal buys;
