@@ -40,10 +40,10 @@
         Orderbook - display - half screen buy, half screen sell
         Orderbook - display - set scroll on both sides
         Orderbook - display - pre-set scroll position to last on the buy side
-        Contract - interface for token generation with limit
-        Contract - implement interface for token
+[DONE]  Contract - interface for token generation with limit
+[DONE]  Contract - implement interface for token
 [DONE]  Contract - check syntax in remix
-        Contract - check works in remix
+[DONE]  Contract - check works in remix
         Contract check - can put a buy order
         Contract check - can retract a buy order
         Contract check - can put a sell order
@@ -52,4 +52,4 @@
         Contract check - can fill a sell order
         Contract check - can fill 2 buy orders
         Contract check - can fill 2 sell orders
-        Contract - publish on ropsten (no code)
+[DONE]  Contract - publish on ropsten (no code)

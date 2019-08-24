@@ -25,15 +25,17 @@ contract FlowCoin is StandardToken, ReentrancyGuard, GeneratedToken {
     string public constant name = "Flow";
     string public constant symbol = "FLOW";
     uint256 public constant decimals = 4;
-    uint256 public totalSupply_ = 0;
     
-    uint256 public constant supplyLimit = 1000000*0.90*10**decimals;
-    uint256 public generationRate = 10;
-    
-    // premine 10% of max supply limit to owner's address
     constructor() public {
-        totalSupply_ = 1000000*0.10*10**decimals;
-        balances[msg.sender] = 1000000*0.10*10**decimals;
+        // total possible coin: 10,000 FC
+        // generation rate: 1 FC
+        supplyLimit = 10000*10**decimals;
+        generationRate = 1*10**decimals;
+    
+        // premine 10% of supply limit to owner's address
+        // premined amount: 1000 FC
+        totalSupply_ = 10000*0.10*10**decimals; 
+        balances[msg.sender] = 10000*0.10*10**decimals;
     }
     
     

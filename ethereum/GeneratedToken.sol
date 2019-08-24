@@ -12,9 +12,8 @@ import "./SafeMath.sol";
 contract GeneratedToken is BasicToken {
   using SafeMath for uint256;
 
-  uint256 supplyLimit;
-  uint256 generationRate;
-  uint256 totalSupply_;
+  uint256 public supplyLimit;
+  uint256 public generationRate;
 
   /**
   * @dev Generates a fixed amount of token for the sender, up to a limit
