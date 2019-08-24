@@ -1,4 +1,5 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.11;
+pragma experimental ABIEncoderV2;
 
 import "./StandardToken.sol";
 import "./ReentrancyGuard.sol";
@@ -16,7 +17,7 @@ import "./SafeMath.sol";
  * FlowCoin is a Standard ERC-20 Token
  * https://github.com/OpenZeppelin/openzeppelin-solidity/blob/master/contracts/token/ERC20/StandardToken.sol
  */
-contract FlowCoin is StandardToken {
+contract FlowCoin is StandardToken, ReentrancyGuard {
     using SafeMath for uint256;
 
     string public constant name = "Flow";
@@ -31,12 +32,11 @@ contract FlowCoin is StandardToken {
      * @param _ratio the ratio of FLOW-to-ETH
      * @param _amount the amount of tokens to be sold
      * @param _seller the address of the seller
-     * @param _timestamp the block timestamp when order was placed
      */
     event Sell(
         uint256 _ratio,
         uint256 _amount,
-        address _seller
+        address payable _seller
     );
     
     /**
@@ -44,7 +44,6 @@ contract FlowCoin is StandardToken {
      * @param _ratio the ratio of FLOW-to-ETH
      * @param _amount the amount of tokens to be bought
      * @param _seller the address of the buyer
-     * @param _timestamp the block timestamp when order was placed
      */
     event Buy(
         uint256 _ratio,
@@ -56,8 +55,8 @@ contract FlowCoin is StandardToken {
      * @dev Struct used to transmit orders to sell and buy functions
      */
     struct Order {
-        uint256 _ratio,
-        address _author
+        uint256 _ratio;
+        address payable _author;
     }
     
     /**
@@ -171,7 +170,7 @@ contract FlowCoin is StandardToken {
     function fillBuyOrder(
         uint256 _ratio,
         uint256 _amount,
-        uint256 _buyer
+        address _buyer
     )   private
         returns (uint256)
     {
@@ -210,7 +209,7 @@ contract FlowCoin is StandardToken {
     function fillSellOrder(
         uint256 _ratio,
         uint256 _amount,
-        uint256 _seller,
+        address payable _seller,
         uint256 _payment
     )   private
         returns (uint256, uint256)
@@ -251,7 +250,7 @@ contract FlowCoin is StandardToken {
      */
     function sellFlow(
         uint256 _amount,
-        Order[] _orders
+        Order[] calldata _orders
     )   external
         nonReentrant
         returns (uint256)
@@ -259,11 +258,13 @@ contract FlowCoin is StandardToken {
         require(_amount > 0);
         require(_amount <= balances[msg.sender]);
         
-        for (uint256 i = 0; i < _orders.length && _amount > 0; i++) {
-            _amount = fillBuyOrder(_orders[i]._ratio, _amount, _orders[i]._author);
+        uint256 amount_left = _amount;
+        
+        for (uint256 i = 0; i < _orders.length && amount_left > 0; i++) {
+            amount_left = fillBuyOrder(_orders[i]._ratio, amount_left, _orders[i]._author);
         }
         
-        return _amount;
+        return amount_left;
     }
     
     /**
@@ -273,7 +274,7 @@ contract FlowCoin is StandardToken {
      */
     function buyFlow(
         uint256 _amount,
-        Order[] _orders
+        Order[] calldata _orders
     )   external
         nonReentrant
         payable
@@ -282,16 +283,17 @@ contract FlowCoin is StandardToken {
         require(_amount > 0);
         require(msg.value > 0);
         
+        uint256 amount_left = _amount;
         uint256 payment = msg.value;
         
-        for (uint256 i = 0; i < _orders.length && _amount > 0 && payment > 0; i++) {
-            (_amount, payment) = fillSellOrder(_orders[i]._ratio, _amount, _orders[i]._author, payment);
+        for (uint256 i = 0; i < _orders.length && amount_left > 0 && payment > 0; i++) {
+            (amount_left, payment) = fillSellOrder(_orders[i]._ratio, amount_left, _orders[i]._author, payment);
         }
         
         if (payment > 0) {
             msg.sender.transfer(payment);
         }
         
-        return _amount;
+        return amount_left;
     }
 }

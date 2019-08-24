@@ -42,7 +42,7 @@
         Orderbook - display - pre-set scroll position to last on the buy side
         Contract - interface for token generation with limit
         Contract - implement interface for token
-        Contract - check syntax in remix
+[DONE]  Contract - check syntax in remix
         Contract - check works in remix
         Contract check - can put a buy order
         Contract check - can retract a buy order
