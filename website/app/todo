@@ -22,7 +22,10 @@
         Connect - GetPriceHistory
         Implement design / color palette
         Add navbar
-        Display - my balance
+        Navbar - menu
+        Navbar - show balance
+        Navbar - show GetFC/GenerateFC buttons
+[DONE]  Display - my balance
 [DONE]  Display - 1x my orders
 [DONE]  Display - my active orders
         Display - Place order

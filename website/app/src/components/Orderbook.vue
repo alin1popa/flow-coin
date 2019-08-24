@@ -1,7 +1,5 @@
 <template>
   <div class="orderbook">
-    <p>My balance: {{ balance }}</p>
-
     <div class="orderbook__list">
       <div class="orderbook__item" v-for="order in orderbook" v-bind:key="order.id">
         <span class="orderbook__item__address">{{ order.address }} </span>
@@ -24,10 +22,6 @@ import { ContractService } from '@/services/ContractService';
 
 @Component
 export default class Orderbook extends Vue {
-  get balance(): number {
-    return ContractService.GetBalance();
-  }
-
   get orderbook(): Order[] {
     return ContractService.GetOrderbook();
   }
