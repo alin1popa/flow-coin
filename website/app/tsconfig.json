@@ -11,8 +11,14 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@types/node"
     ],
     "paths": {
       "@/*": [

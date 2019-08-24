@@ -1,8 +1,11 @@
+import { ethers } from 'ethers';
 import { Order } from '@/models/Order';
 import { OrderType } from '@/models/OrderType';
 import { Request } from '@/models/Request';
 import { RequestType } from '@/models/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
+// import * as fs from 'fs';
+const abi = require('@/assets/contract_abi.json');
 
 export class ContractService {
     /**
@@ -11,6 +14,15 @@ export class ContractService {
      */
     public static GetBalance(): number {
         // TODO
+        //https://github.com/ethers-io/ethers.js/issues/308
+
+        const provider = ethers.getDefaultProvider('ropsten');
+        const contractAddress = '0x1988a16caa08e4908c15de8ff37e21aed2904c20';
+        const contract = new ethers.Contract(contractAddress, abi, provider);
+
+        contract.balanceOf('0x005E647155bCfd6BE6B6B158CF880909b3B51863')
+        .then((value: number) => alert(value));
+
         return 420.68;
     }
 

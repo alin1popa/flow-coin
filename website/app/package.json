@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "ethers": "^4.0.36",
     "flexboxgrid": "^6.3.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
@@ -17,6 +18,7 @@
     "vue-tables-2": "^1.4.70"
   },
   "devDependencies": {
+    "@types/node": "^12.7.2",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
