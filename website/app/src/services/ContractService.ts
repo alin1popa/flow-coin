@@ -4,6 +4,7 @@ import { OrderType } from '@/models/OrderType';
 import { Request } from '@/models/Request';
 import { RequestType } from '@/models/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
+// tslint:disable-next-line
 const abi = require('@/assets/contract_abi.json');
 
 export class ContractService {
@@ -11,9 +12,13 @@ export class ContractService {
      * @description Gets current account's balance
      * @returns number
      */
+    public static state = {
+        val: "asdasd",
+    };
+
     public static GetBalance(): number {
         // TODO
-        //https://github.com/ethers-io/ethers.js/issues/308
+        // https://github.com/ethers-io/ethers.js/issues/308
 
         const provider = ethers.getDefaultProvider('ropsten');
         const contractAddress = '0x1988a16caa08e4908c15de8ff37e21aed2904c20';

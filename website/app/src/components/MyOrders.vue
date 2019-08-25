@@ -1,6 +1,7 @@
 <template>
   <div class="myorders">
     <p>My balance: {{ balance }}</p>
+    {{ state.val }}
 
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id">
@@ -21,8 +22,22 @@ import { Order } from '@/models/Order';
 import { OrderType } from '@/models/OrderType';
 import { ContractService } from '@/services/ContractService';
 
-@Component
+@Component<MyOrders>({
+  mounted() {
+    const x = new Promise((resolve) => {
+      setTimeout(resolve, 3000);
+    });
+    x.then(() => {
+      // this.$set(this.cs, 'val', 'duuuude');
+      ContractService.state.val = 'duuuuuuude';
+    });
+  },
+})
 export default class MyOrders extends Vue {
+  private info: string = '';
+
+  private state = ContractService.state;
+
   get balance(): number {
     return ContractService.GetBalance();
   }

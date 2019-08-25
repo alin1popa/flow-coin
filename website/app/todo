@@ -9,7 +9,7 @@
         Create get readwrite contract
         Connect through auto injected web3
         Test auto injected web3 with metamask for readonly / readwrite
-        Refactor promises/async data getters in the vue way
+[DONE]  Refactor promises/async data getters in the vue way
 [DONE]  Create lib to interface with contract
 [DONE]  Lib - GetBalance
 [DONE]  Model - Order
@@ -59,3 +59,7 @@
         Contract check - can fill 2 buy orders
         Contract check - can fill 2 sell orders
 [DONE]  Contract - publish on ropsten (no code)
+        State manager - singleton
+        State manager - state component
+        State manager - init in my orders
+        State manager - plan listeners for ethereum events
