@@ -1,9 +1,15 @@
         Select color palette
-        Post contract to testnet
-        Figure out how to install/use a js eth lib
-        Figure out how to get data from contract
+[DONE]  Post contract to testnet
+[DONE]  Figure out how to install/use a js eth lib
+[DONE]  Figure out how to get data from contract
         Figure out how to push data to contract (call functions)
         Figure out how to get event history
+        Create ethereum network helper
+        Create get readonly contract
+        Create get readwrite contract
+        Connect through auto injected web3
+        Test auto injected web3 with metamask for readonly / readwrite
+        Refactor promises/async data getters in the vue way
 [DONE]  Create lib to interface with contract
 [DONE]  Lib - GetBalance
 [DONE]  Model - Order

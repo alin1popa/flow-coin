@@ -4,7 +4,6 @@ import { OrderType } from '@/models/OrderType';
 import { Request } from '@/models/Request';
 import { RequestType } from '@/models/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
-// import * as fs from 'fs';
 const abi = require('@/assets/contract_abi.json');
 
 export class ContractService {
