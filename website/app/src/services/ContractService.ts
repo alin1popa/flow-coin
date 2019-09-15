@@ -1,28 +1,20 @@
-import { ethers } from 'ethers';
 import { Order } from '@/models/Order';
 import { OrderType } from '@/models/OrderType';
 import { Request } from '@/models/Request';
 import { RequestType } from '@/models/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
-// tslint:disable-next-line
-const abi = require('@/assets/contract_abi.json');
+import { EthereumHelper } from '@/helpers/EthereumHelper';
 
 export class ContractService {
     /**
      * @description Gets current account's balance
      * @returns number
      */
-    public static state = {
-        val: "asdasd",
-    };
-
     public static GetBalance(): number {
         // TODO
         // https://github.com/ethers-io/ethers.js/issues/308
 
-        const provider = ethers.getDefaultProvider('ropsten');
-        const contractAddress = '0x1988a16caa08e4908c15de8ff37e21aed2904c20';
-        const contract = new ethers.Contract(contractAddress, abi, provider);
+        const contract = EthereumHelper.GetReadWriteContract();
 
         contract.balanceOf('0x005E647155bCfd6BE6B6B158CF880909b3B51863')
         .then((value: number) => alert(value));
