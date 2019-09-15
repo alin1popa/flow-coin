@@ -67,3 +67,16 @@
         Check contract if require() deletes all your gas
         Fix require if it deletes all your gas
         Metamask fix warning network reload
+        EthHelper get latest block B
+        EthHelper get event history up to B (event logs)
+        EthHelper get event type by its topic
+        Figure out if Settle event needed for price (diff between retracting order and settling)
+        Create EventListener class
+        EventListener get event history
+        EventListener register listeners for all events
+        EventListener set listener callbacks
+        Create Map<Address, Ratio => Amount, index in state array>
+        EventListener map history to Map<...> (and update stuff)
+        EventListener convert Map<...> to state.Orders[]
+        EventListener update Map<...> to contain Order[] index
+        Convert units for orders (don't want to display 10^21381798320 wei)
