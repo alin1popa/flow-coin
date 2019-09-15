@@ -3,7 +3,8 @@
 [DONE]  Figure out how to install/use a js eth lib
 [DONE]  Figure out how to get data from contract
         Figure out how to push data to contract (call functions)
-        Figure out how to get event history
+[DONE]  Figure out how to get event history
+[DONE]  Figure out how to listen to events
 [DONE]  Create ethereum network helper
 [DONE]  Create get readonly contract
 [DONE]  Create get readwrite contract
@@ -21,7 +22,7 @@
 [DONE]  Lib - PlaceOrder
 [DONE]  Lib - GetOrderbook
 [DONE]  Lib - GetPriceHistory
-        Connect - GetBalance
+[DONE]  Connect - GetBalance
         Connect - GetMyOrders
         Connect - PlaceOrder
         Connect - GetOrderbook
@@ -65,3 +66,4 @@
         State manager - plan listeners for ethereum events
         Check contract if require() deletes all your gas
         Fix require if it deletes all your gas
+        Metamask fix warning network reload
