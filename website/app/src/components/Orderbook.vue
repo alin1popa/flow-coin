@@ -17,7 +17,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import { Order } from '@/models/Order';
-import { OrderType } from '@/models/OrderType';
+import { OrderType } from '@/constants/OrderType';
 import { ContractService } from '@/services/ContractService';
 
 @Component

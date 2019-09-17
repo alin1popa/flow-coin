@@ -3,6 +3,8 @@
  */
 export interface IAppState {
     val: string;
+    contract: any;
+    provider: any;
 }
 
 /**
@@ -21,6 +23,8 @@ export class StateManager {
 
     private state: IAppState = {
         val: 'asdasd',
+        contract: null,
+        provider: null,
     };
 
     private constructor() {}

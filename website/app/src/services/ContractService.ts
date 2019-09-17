@@ -1,7 +1,7 @@
 import { Order } from '@/models/Order';
-import { OrderType } from '@/models/OrderType';
+import { OrderType } from '@/constants/OrderType';
 import { Request } from '@/models/Request';
-import { RequestType } from '@/models/RequestType';
+import { RequestType } from '@/constants/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
 

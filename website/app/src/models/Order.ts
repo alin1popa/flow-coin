@@ -1,4 +1,4 @@
-import { OrderType } from './OrderType';
+import { OrderType } from '@/constants/OrderType';
 
 export class Order {
     constructor(

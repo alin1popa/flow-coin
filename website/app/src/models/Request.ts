@@ -1,5 +1,5 @@
-import { OrderType } from './OrderType';
-import { RequestType } from './RequestType';
+import { OrderType } from '@/constants/OrderType';
+import { RequestType } from '@/constants/RequestType';
 
 export class Request {
     constructor(
