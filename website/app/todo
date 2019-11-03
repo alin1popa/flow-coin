@@ -76,10 +76,10 @@
 [DONE]  EventListener get event history
 [DONE]  EventListener register listeners for all events
 [DONE]  EventListener set listener callbacks
-        Create Map<Address, Ratio => Amount, index in state array>
-        EventListener map history to Map<...> (and update stuff)
-        EventListener convert Map<...> to state.Orders[]
-        EventListener update Map<...> to contain Order[] index
+[NOPE]  Create Map<Address, Ratio => Amount, index in state array>
+[NOPE]  EventListener map history to Map<...> (and update stuff)
+[NOPE]  EventListener convert Map<...> to state.Orders[]
+[NOPE]  EventListener update Map<...> to contain Order[] index
         Convert units for orders (don't want to display 10^21381798320 wei)
 [DONE]  Move GetProvider to separate function
 [DONE]  Remove provider from readwrite contract

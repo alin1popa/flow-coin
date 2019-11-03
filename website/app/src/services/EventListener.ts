@@ -56,21 +56,21 @@ export class EventListener {
 
     private SetUpEventListeners(contract: any) {
         contract.on('Sell', (a: any, b: any, c: any) => {
-            // tslint:disable-next-line
-            console.log(JSON.stringify({a, b, c}));
-
             const event = new Event(EventType.SELL, a, b, c);
             const state = StateManager.GetInstance().GetState();
+
+            // tslint:disable-next-line
+            console.log(JSON.stringify(event));
 
             this.ProcessSellEvent(event, state);
         });
 
         contract.on('Buy', (a: any, b: any, c: any) => {
-            // tslint:disable-next-line
-            console.log(JSON.stringify({a, b, c}));
-
             const event = new Event(EventType.BUY, a, b, c);
             const state = StateManager.GetInstance().GetState();
+
+            // tslint:disable-next-line
+            console.log(JSON.stringify(event));
 
             this.ProcessBuyEvent(event, state);
         });

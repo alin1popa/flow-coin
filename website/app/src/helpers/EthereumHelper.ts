@@ -74,28 +74,6 @@ export class EthereumHelper {
         const contractAddress = this.CONTRACT_ADDRESS;
         const contract = new ethers.Contract(contractAddress, abi, signer);
 
-        // console.log(contract.interface.events.Sell.topic);
-        // console.log(contract.interface.events.Buy.topic);
-
-        // let event = contract.interface.events.Sell;
-        // provider.getLogs({
-        //     fromBlock: 0,
-        //     toBlock: 'latest',
-        //     address: contract.address,
-        //   }).then((logs) => {
-        //     logs.map((log) => {
-                // console.log(log.topics + ' ' + log.data);
-                // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[0].toString());
-                // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[1].toString());
-                // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[2].toString());
-        //     });
-        //   });
-
-        // contract.on('Sell', (a, b, c) => {
-        //     // tslint:disable-next-line
-        //     console.log(JSON.stringify({a, b, c}));
-        // });
-
         return contract;
     }
 
