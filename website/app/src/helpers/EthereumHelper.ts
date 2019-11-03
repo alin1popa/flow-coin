@@ -69,25 +69,7 @@ export class EthereumHelper {
     /**
      * @description Gets read-write contract using specified provider
      */
-    public static GetReadWriteContract() {
-        const windowWithInjectedProvider = window as IWindowWithInjectedProvider;
-
-        let injectedProvider;
-        if (windowWithInjectedProvider.ethereum !== undefined) {
-            windowWithInjectedProvider.ethereum.enable();
-            injectedProvider = windowWithInjectedProvider.ethereum;
-        } else if (windowWithInjectedProvider.web3 !== undefined) {
-            injectedProvider = windowWithInjectedProvider.web3.currentProvider;
-        } else {
-            // TODO throw error
-
-            // tslint:disable-next-line
-            console.log('ERROR: Injected Web3 not found');
-            // tslint:disable-next-line
-            console.log('Please install MetaMask and allow the dApp to interact with your address.');
-        }
-
-        const provider = new ethers.providers.Web3Provider(injectedProvider);
+    public static GetReadWriteContract(provider: any) {
         const signer = provider.getSigner(0);
         const contractAddress = this.CONTRACT_ADDRESS;
         const contract = new ethers.Contract(contractAddress, abi, signer);
@@ -95,24 +77,24 @@ export class EthereumHelper {
         // console.log(contract.interface.events.Sell.topic);
         // console.log(contract.interface.events.Buy.topic);
 
-        let event = contract.interface.events.Sell;
-        provider.getLogs({
-            fromBlock: 0,
-            toBlock: 'latest',
-            address: contract.address,
-          }).then((logs) => {
-            logs.map((log) => {
+        // let event = contract.interface.events.Sell;
+        // provider.getLogs({
+        //     fromBlock: 0,
+        //     toBlock: 'latest',
+        //     address: contract.address,
+        //   }).then((logs) => {
+        //     logs.map((log) => {
                 // console.log(log.topics + ' ' + log.data);
                 // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[0].toString());
                 // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[1].toString());
                 // console.log(contract.interface.events.Sell.decode(log.data, log.topics)[2].toString());
-            });
-          });
+        //     });
+        //   });
 
-        contract.on('Sell', (a, b, c) => {
-            // tslint:disable-next-line
-            console.log(JSON.stringify({a, b, c}));
-        });
+        // contract.on('Sell', (a, b, c) => {
+        //     // tslint:disable-next-line
+        //     console.log(JSON.stringify({a, b, c}));
+        // });
 
         return contract;
     }
@@ -122,7 +104,7 @@ export class EthereumHelper {
      * @param provider contract provider
      * @param maxBlock the latest block to fetch events for
      */
-    public static async GetEventHistory(provider: any, maxBlock: number) {
+    public static async GetEventHistory(provider: any, maxBlock: number | string) {
         return await provider.getLogs({
             fromBlock: 0,
             toBlock: maxBlock,

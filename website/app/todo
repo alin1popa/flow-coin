@@ -63,29 +63,32 @@
 [DONE]  State manager - singleton
 [DONE]  State manager - state component
 [DONE]  State manager - init in my orders
-        State manager - plan listeners for ethereum events
+[DONE]  State manager - plan listeners for ethereum events
         Check contract if require() deletes all your gas
         Fix require if it deletes all your gas
         Metamask fix warning network reload
-        EthHelper get latest block B
+[DONE]  EthHelper get latest block B
 [DONE]  EthHelper get event history up to B (event logs)
 [DONE]  EthHelper get event type by its topic
         Figure out if Settle event needed for price (diff between retracting order and settling)
 [DONE]  Create EventListener class
-        EventListener get latest block B
+[DONE]  EventListener get latest block B
 [DONE]  EventListener get event history
-        EventListener register listeners for all events
-        EventListener set listener callbacks
+[DONE]  EventListener register listeners for all events
+[DONE]  EventListener set listener callbacks
         Create Map<Address, Ratio => Amount, index in state array>
         EventListener map history to Map<...> (and update stuff)
         EventListener convert Map<...> to state.Orders[]
         EventListener update Map<...> to contain Order[] index
         Convert units for orders (don't want to display 10^21381798320 wei)
 [DONE]  Move GetProvider to separate function
-        Remove provider from readwrite contract
+[DONE]  Remove provider from readwrite contract
 [DONE]  Create singleton Loader instance
-        Loader - Call in dashboard
+[DONE]  Loader - Call in dashboard
 [DONE]  Loader - generate state
 [DONE]  Loader - setup contract in state
 [DONE]  Loader - setup event listener
-        Loader - wait for all loaded
+[DONE]  Loader - wait for all loaded
+        Loader - what happens when it can't get injected provider => must error
+        EventListener - process buy event
+        EventListener - process sell event

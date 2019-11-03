@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard row">
+  <div class="dashboard row" v-if=appLoaded>
     <div class="col-xs-12
                 col-sm-12
                 col-md-4 col">
@@ -44,6 +44,8 @@ import { Component, Vue } from 'vue-property-decorator';
 import Panel from '@/components/Panel.vue';
 import Orderbook from '@/components/Orderbook.vue';
 import MyOrders from '@/components/MyOrders.vue';
+import { StateManager } from '@/services/StateManager.ts';
+import { Loader } from '@/services/Loader.ts';
 
 @Component({
   components: {
@@ -51,8 +53,17 @@ import MyOrders from '@/components/MyOrders.vue';
     Orderbook,
     MyOrders,
   },
+  mounted() {
+    Loader.GetInstance().LoadApp();
+  },
 })
-export default class Dashboard extends Vue {}
+export default class Dashboard extends Vue {
+  private state = StateManager.GetInstance().GetState();
+
+  get appLoaded(): boolean {
+    return this.state.appLoaded;
+  }
+}
 </script>
 
 <style scoped>

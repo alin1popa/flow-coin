@@ -4,6 +4,7 @@ import { Request } from '@/models/Request';
 import { RequestType } from '@/constants/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
+import { StateManager } from '@/services/StateManager';
 
 export class ContractService {
     /**
@@ -14,7 +15,8 @@ export class ContractService {
         // TODO
         // https://github.com/ethers-io/ethers.js/issues/308
 
-        const contract = EthereumHelper.GetReadWriteContract();
+        const state = StateManager.GetInstance().GetState();
+        const contract = EthereumHelper.GetReadWriteContract(state.provider);
 
         contract.balanceOf('0x005E647155bCfd6BE6B6B158CF880909b3B51863')
         .then((value: number) => alert(value));

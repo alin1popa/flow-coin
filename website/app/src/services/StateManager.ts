@@ -5,10 +5,11 @@ export interface IAppState {
     val: string;
     contract: any;
     provider: any;
+    appLoaded: boolean;
 }
 
 /**
- * @description App state manager
+ * @description App state manager and single source of truth
  */
 export class StateManager {
     public static GetInstance(): StateManager {
@@ -25,6 +26,7 @@ export class StateManager {
         val: 'asdasd',
         contract: null,
         provider: null,
+        appLoaded: false,
     };
 
     private constructor() {}

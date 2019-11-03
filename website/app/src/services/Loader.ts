@@ -20,12 +20,29 @@ export class Loader {
     private constructor() {}
 
     public async LoadApp() {
+        // setup state
         const state = StateManager.GetInstance().GetState();
+        if (state.appLoaded) {
+            return;
+        }
 
+        // tslint:disable-next-line
+        console.log("Initialized state");
+
+        // setup provider and contract
         state.provider = EthereumHelper.GetInjectedProvider();
-        state.contract = EthereumHelper.GetReadWriteContract();
+        state.contract = EthereumHelper.GetReadWriteContract(state.provider);
 
+        // tslint:disable-next-line
+        console.log("Initialized contract");
+
+        // process events and setup listeners
         const eventListener = EventListener.GetInstance();
         await eventListener.Initialize();
+
+        // tslint:disable-next-line
+        console.log("Initialized events");
+
+        state.appLoaded = true;
     }
 }
