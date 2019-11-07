@@ -15,7 +15,7 @@
                     col-sm-6
                     col-md-6 col">
           <Panel color="purple" title="asda" class="box" id="panel-placeorder">
-            <Orderbook/>
+            <PlaceOrder/>
           </Panel>
         </div>
         <div class="col-xs-12
@@ -44,6 +44,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import Panel from '@/components/Panel.vue';
 import Orderbook from '@/components/Orderbook.vue';
 import MyOrders from '@/components/MyOrders.vue';
+import PlaceOrder from '@/components/PlaceOrder.vue';
 import { StateManager } from '@/services/StateManager.ts';
 import { Loader } from '@/services/Loader.ts';
 
@@ -52,6 +53,7 @@ import { Loader } from '@/services/Loader.ts';
     Panel,
     Orderbook,
     MyOrders,
+    PlaceOrder,
   },
   mounted() {
     Loader.GetInstance().LoadApp();

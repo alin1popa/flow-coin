@@ -2,7 +2,7 @@
 [DONE]  Post contract to testnet
 [DONE]  Figure out how to install/use a js eth lib
 [DONE]  Figure out how to get data from contract
-        Figure out how to push data to contract (call functions)
+[DONE]  Figure out how to push data to contract (call functions)
 [DONE]  Figure out how to get event history
 [DONE]  Figure out how to listen to events
 [DONE]  Create ethereum network helper
@@ -24,7 +24,7 @@
 [DONE]  Lib - GetPriceHistory
 [DONE]  Connect - GetBalance
         Connect - GetMyOrders
-        Connect - PlaceOrder
+[DONE]  Connect - PlaceOrder
         Connect - GetOrderbook
         Connect - GetPriceHistory
         Implement design / color palette
@@ -35,7 +35,7 @@
 [DONE]  Display - my balance
 [DONE]  Display - 1x my orders
 [DONE]  Display - my active orders
-        Display - Place order
+[DONE]  Display - Place order
         Display - Place market order
 [DONE]  Display - 1x order from orderbook
 [DONE]  Display - all orders from orderbook
@@ -90,5 +90,5 @@
 [DONE]  Loader - setup event listener
 [DONE]  Loader - wait for all loaded
         Loader - what happens when it can't get injected provider => must error
-        EventListener - process buy event
-        EventListener - process sell event
+[DONE]  EventListener - process buy event
+[DONE]  EventListener - process sell event

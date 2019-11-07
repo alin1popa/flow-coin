@@ -9,7 +9,7 @@
       <input type="checkbox" name="type" v-model="type"/>
 
       {{ disclaimerText }}
-      <button name="submit" value="submit" v-bind:disabled="!isLoading" v-on:click="submitOrder()">{{ isLoading ? 'Place Order' : 'Pending...'}}</button>
+      <button name="submit" value="submit" v-bind:disabled="isLoading" v-on:click="submitOrder()">{{ !isLoading ? 'Place Order' : 'Pending...'}}</button>
     </div>
 
   </div>
@@ -25,6 +25,15 @@ import { StateManager } from '@/services/StateManager';
 import { Request } from '@/models/Request';
 import { RequestType } from '../constants/RequestType';
 
+enum ViewOrderType {
+  SELL = 0,
+  BUY = 1,
+}
+
+function mapViewOrderTypeToOrderType(type: ViewOrderType) {
+  return type === ViewOrderType.BUY ? OrderType.BUY : OrderType.SELL;
+}
+
 @Component<PlaceOrder>({
   mounted() {
     const x = new Promise((resolve) => {
@@ -37,15 +46,10 @@ import { RequestType } from '../constants/RequestType';
   },
 })
 
-enum VIEW_ORDER_TYPE {
-  BUY = 1,
-  SELL = 0
-}
-
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
   private amount: number = 1;
-  private type: VIEW_ORDER_TYPE = VIEW_ORDER_TYPE.BUY;
+  private type: ViewOrderType = ViewOrderType.BUY;
   private isLoading: boolean = false;
 
   private info: string = '';
@@ -53,7 +57,7 @@ export default class PlaceOrder extends Vue {
   private state = StateManager.GetInstance().GetState();
 
   get disclaimerText(): string {
-    return `I want to ${this.type === VIEW_ORDER_TYPE.BUY ? 'buy' : 'sell'} ${this.amount} of FC at ${this.ratio} ethers each`
+    return `I want to ${this.type === ViewOrderType.BUY ? 'buy' : 'sell'} ${this.amount} of FC at ${this.ratio} ethers each`;
   }
 
   get balance(): number {
@@ -64,10 +68,10 @@ export default class PlaceOrder extends Vue {
     this.isLoading = true;
 
     const request = new Request(
-      this.type === VIEW_ORDER_TYPE.BUY ? OrderType.BUY : OrderType.SELL,
+      mapViewOrderTypeToOrderType(this.type),
       RequestType.REGULAR,
       this.amount,
-      this.ratio
+      this.ratio,
     );
 
     ContractService.PlaceOrderRequest(request);

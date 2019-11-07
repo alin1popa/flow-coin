@@ -5,6 +5,7 @@ import { RequestType } from '@/constants/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
 import { StateManager } from '@/services/StateManager';
+import { ethers } from 'ethers';
 
 export class ContractService {
     /**
@@ -16,7 +17,8 @@ export class ContractService {
         // https://github.com/ethers-io/ethers.js/issues/308
 
         const state = StateManager.GetInstance().GetState();
-        const contract = EthereumHelper.GetReadWriteContract(state.provider);
+        // const contract = EthereumHelper.GetReadWriteContract(state.provider);
+        const contract = state.contract;
 
         contract.balanceOf('0x005E647155bCfd6BE6B6B158CF880909b3B51863')
         .then((value: number) => alert(value));
@@ -41,8 +43,23 @@ export class ContractService {
      * @description Places an order request
      * @param request Request
      */
-    public static PlaceOrderRequest(request: Request): void {
+    public static async PlaceOrderRequest(request: Request) {
         // TODO
+        const state = StateManager.GetInstance().GetState();
+        // const contract = EthereumHelper.GetReadWriteContract(state.provider);
+        const contract = state.contract;
+
+        const weiAmount = ethers.utils.parseEther(request.rate.toString());
+
+        const overrides = {
+            value: weiAmount.mul(request.quantity),
+        };
+        const tx = await contract.placeBuyOrder(weiAmount, request.quantity, overrides);
+        // tslint:disable-next-line
+        console.log(tx.hash);
+
+        await tx.wait();
+        state.val = 'MINED';
     }
 
     /**

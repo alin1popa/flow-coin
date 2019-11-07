@@ -55,8 +55,8 @@ export class EventListener {
     }
 
     private SetUpEventListeners(contract: any) {
-        contract.on('Sell', (a: any, b: any, c: any) => {
-            const event = new Event(EventType.SELL, a, b, c);
+        contract.on('Sell', (ratio: any, amount: any, address: any) => {
+            const event = new Event(EventType.SELL, address, ratio, amount);
             const state = StateManager.GetInstance().GetState();
 
             // tslint:disable-next-line
@@ -65,8 +65,8 @@ export class EventListener {
             this.ProcessSellEvent(event, state);
         });
 
-        contract.on('Buy', (a: any, b: any, c: any) => {
-            const event = new Event(EventType.BUY, a, b, c);
+        contract.on('Buy', (ratio: any, amount: any, address: any) => {
+            const event = new Event(EventType.BUY, address, ratio, amount);
             const state = StateManager.GetInstance().GetState();
 
             // tslint:disable-next-line
