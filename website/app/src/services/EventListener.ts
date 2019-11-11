@@ -45,16 +45,26 @@ export class EventListener {
         this.SetUpEventListeners(state.contract);
     }
 
+    private AddOrderToOwnOrdersIfNecessary(order: Order, state: IAppState) {
+        if (order.address === state.ownAddress) {
+            state.ownOrders.push(order);
+        }
+    }
+
     private ProcessBuyEvent(event: Event, state: IAppState) {
         const order = new Order(event.address!, OrderType.BUY, event.amount!, event.ratio!);
         Utils.OrderInsertOrUpdate(order, state.buyOrders);
         state.buyOrders.splice(0, 0);
+
+        this.AddOrderToOwnOrdersIfNecessary(order, state);
     }
 
     private ProcessSellEvent(event: Event, state: IAppState) {
         const order = new Order(event.address!, OrderType.SELL, event.amount!, event.ratio!);
         Utils.OrderInsertOrUpdate(order, state.sellOrders);
         state.sellOrders.splice(0, 0);
+
+        this.AddOrderToOwnOrdersIfNecessary(order, state);
     }
 
     private ProcessEvent(event: Event, state: IAppState) {

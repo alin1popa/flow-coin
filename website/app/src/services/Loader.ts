@@ -31,7 +31,9 @@ export class Loader {
 
         // setup provider and contract
         state.provider = EthereumHelper.GetInjectedProvider();
-        state.contract = EthereumHelper.GetReadWriteContract(state.provider);
+        state.signer = EthereumHelper.GetSigner(state.provider);
+        state.contract = EthereumHelper.GetReadWriteContract(state.signer);
+        state.ownAddress = await EthereumHelper.GetCurrentUserAddress(state.signer);
 
         // tslint:disable-next-line
         console.log("Initialized contract");

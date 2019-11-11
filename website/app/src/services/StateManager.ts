@@ -7,9 +7,12 @@ export interface IAppState {
     val: string;
     contract: any;
     provider: any;
+    signer: any;
     appLoaded: boolean;
     buyOrders: Order[];
     sellOrders: Order[];
+    ownAddress: string;
+    ownOrders: Order[];
 }
 
 /**
@@ -30,9 +33,12 @@ export class StateManager {
         val: 'asdasd',
         contract: null,
         provider: null,
+        signer: null,
         appLoaded: false,
         buyOrders: [],
         sellOrders: [],
+        ownOrders: [],
+        ownAddress: '',
     };
 
     private constructor() {}

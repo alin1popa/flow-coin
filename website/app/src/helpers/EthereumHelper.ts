@@ -67,10 +67,27 @@ export class EthereumHelper {
     }
 
     /**
-     * @description Gets read-write contract using specified provider
+     * @description Gets signer from provider
      */
-    public static GetReadWriteContract(provider: any) {
+    public static GetSigner(provider: any) {
         const signer = provider.getSigner(0);
+
+        return signer;
+    }
+
+    /**
+     * @description Gets current user's address from injected signer
+     */
+    public static async GetCurrentUserAddress(signer: any) {
+        const address = await signer.getAddress();
+
+        return address;
+    }
+
+    /**
+     * @description Gets read-write contract using specified signer
+     */
+    public static GetReadWriteContract(signer: any) {
         const contractAddress = this.CONTRACT_ADDRESS;
         const contract = new ethers.Contract(contractAddress, abi, signer);
 

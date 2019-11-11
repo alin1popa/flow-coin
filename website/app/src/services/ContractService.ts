@@ -30,9 +30,8 @@ export class ContractService {
      * @description Gets current account's active orders
      * @returns Order[]
      */
-    public static GetActiveOrders(): Order[] {
-        // TODO
-        return [];
+    public static GetActiveOrders(state: IAppState): Order[] {
+        return state.ownOrders;
     }
 
     /**

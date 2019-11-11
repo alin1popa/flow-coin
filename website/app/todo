@@ -23,9 +23,9 @@
 [DONE]  Lib - GetOrderbook
 [DONE]  Lib - GetPriceHistory
 [DONE]  Connect - GetBalance
-        Connect - GetMyOrders
+[DONE]  Connect - GetMyOrders
 [DONE]  Connect - PlaceOrder
-        Connect - GetOrderbook
+[DONE]  Connect - GetOrderbook
         Connect - GetPriceHistory
         Implement design / color palette
         Add navbar
@@ -90,8 +90,8 @@
 [DONE]  Loader - setup event listener
 [DONE]  Loader - wait for all loaded
         Loader - what happens when it can't get injected provider => must error
-        EventListener - process buy event
-        EventListener - process sell event
+[DONE]  EventListener - process buy event
+[DONE]  EventListener - process sell event
 [DONE]  Create state arrays buy/sell orders
-        Add past events to state arrays
-        Add new events to state arrays
+[DONE]  Add past events to state arrays
+[DONE]  Add new events to state arrays

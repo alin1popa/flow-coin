@@ -44,7 +44,7 @@ export default class MyOrders extends Vue {
   }
 
   get myorders(): Order[] {
-    return ContractService.GetActiveOrders();
+    return ContractService.GetActiveOrders(this.state);
   }
 
   public actionClicked(order: Order) {
