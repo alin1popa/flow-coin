@@ -90,5 +90,8 @@
 [DONE]  Loader - setup event listener
 [DONE]  Loader - wait for all loaded
         Loader - what happens when it can't get injected provider => must error
-[DONE]  EventListener - process buy event
-[DONE]  EventListener - process sell event
+        EventListener - process buy event
+        EventListener - process sell event
+[DONE]  Create state arrays buy/sell orders
+        Add past events to state arrays
+        Add new events to state arrays

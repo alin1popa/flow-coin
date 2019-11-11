@@ -2,6 +2,9 @@ import { Event } from '@/models/Event';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
 import { StateManager, IAppState } from '@/services/StateManager';
 import { EventType } from '@/constants/EventType';
+import { Utils } from '@/helpers/Utils';
+import { Order } from '@/models/Order';
+import { OrderType } from '@/constants/OrderType';
 
 /**
  * @description Event manager
@@ -29,6 +32,13 @@ export class EventListener {
         // process past events
         const eventLogs: any[] = await EthereumHelper.GetEventHistory(state.provider, latestBlock);
         const eventHistory: Event[] = eventLogs.map((log) => EthereumHelper.ClassifyEventByTopic(state.contract, log));
+        eventHistory.forEach((event: Event) => this.ProcessEvent(event, state));
+
+        // tslint:disable-next-line
+        console.log(state.buyOrders[1].greaterThan(state.buyOrders[0]));
+
+        // tslint:disable-next-line
+        console.log(JSON.stringify(eventLogs));
 
         // set up event listeners for future events
         state.provider.resetEventsBlock(latestBlock + 1);
@@ -36,11 +46,15 @@ export class EventListener {
     }
 
     private ProcessBuyEvent(event: Event, state: IAppState) {
-        // TODO
+        const order = new Order(event.address!, OrderType.BUY, event.amount!, event.ratio!);
+        Utils.OrderInsertOrUpdate(order, state.buyOrders);
+        state.buyOrders.splice(0, 0);
     }
 
     private ProcessSellEvent(event: Event, state: IAppState) {
-        // TODO
+        const order = new Order(event.address!, OrderType.SELL, event.amount!, event.ratio!);
+        Utils.OrderInsertOrUpdate(order, state.sellOrders);
+        state.sellOrders.splice(0, 0);
     }
 
     private ProcessEvent(event: Event, state: IAppState) {

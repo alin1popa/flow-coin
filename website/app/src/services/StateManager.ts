@@ -1,3 +1,5 @@
+import { Order } from '@/models/Order';
+
 /**
  * @description State interface
  */
@@ -6,6 +8,8 @@ export interface IAppState {
     contract: any;
     provider: any;
     appLoaded: boolean;
+    buyOrders: Order[];
+    sellOrders: Order[];
 }
 
 /**
@@ -27,6 +31,8 @@ export class StateManager {
         contract: null,
         provider: null,
         appLoaded: false,
+        buyOrders: [],
+        sellOrders: [],
     };
 
     private constructor() {}

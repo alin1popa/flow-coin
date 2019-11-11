@@ -5,7 +5,7 @@
         <span class="orderbook__item__address">{{ order.address }} </span>
         <span class="orderbook__item__type">{{ order.type + "s" }}</span> 
         <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
-        <span class="orderbook__item__rate">{{ order.rate }} ETH/FC</span>
+        <span class="orderbook__item__rate">{{ displayRate(order.rate) }} ETH/FC</span>
         <span class="orderbook__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
       </div>
     </div>
@@ -19,11 +19,20 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Order } from '@/models/Order';
 import { OrderType } from '@/constants/OrderType';
 import { ContractService } from '@/services/ContractService';
+import { StateManager } from '@/services/StateManager';
+import { BigNumber } from 'ethers/utils';
+import { utils } from 'ethers';
 
 @Component
 export default class Orderbook extends Vue {
+  private state = StateManager.GetInstance().GetState();
+
   get orderbook(): Order[] {
-    return ContractService.GetOrderbook();
+    return ContractService.GetOrderbook(this.state);
+  }
+
+  public displayRate(rate: BigNumber) {
+    return utils.formatUnits(rate, 'ether');
   }
 
   public actionClicked(order: Order) {

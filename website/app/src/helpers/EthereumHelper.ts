@@ -99,7 +99,7 @@ export class EthereumHelper {
         let eventType: EventType;
         let eventData: any;
 
-        switch (event.topics) {
+        switch (event.topics[0]) {
             case contract.interface.events.Sell.topic:
                 eventType = EventType.SELL;
                 eventData = contract.interface.events.Sell.decode(event.data, event.topics);

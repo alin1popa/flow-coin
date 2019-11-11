@@ -4,7 +4,7 @@ import { Request } from '@/models/Request';
 import { RequestType } from '@/constants/RequestType';
 import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
-import { StateManager } from '@/services/StateManager';
+import { StateManager, IAppState } from '@/services/StateManager';
 import { ethers } from 'ethers';
 
 export class ContractService {
@@ -32,11 +32,7 @@ export class ContractService {
      */
     public static GetActiveOrders(): Order[] {
         // TODO
-        return [
-            new Order('0x123456', OrderType.BUY, 25, 0.3),
-            new Order('0x123456', OrderType.SELL, 10, 0.8),
-            new Order('0x123456', OrderType.BUY, 50, 0.2),
-        ];
+        return [];
     }
 
     /**
@@ -66,16 +62,10 @@ export class ContractService {
      * @description Gets all active orders for all accounts
      * @returns Order[]
      */
-    public static GetOrderbook(): Order[] {
+    public static GetOrderbook(state: IAppState): Order[] {
         // TODO
-        return [
-            new Order('0x000001', OrderType.BUY, 70, 0.4),
-            new Order('0x999999', OrderType.BUY, 25, 0.3),
-            new Order('0x999999', OrderType.SELL, 50, 2.5),
-            new Order('0x123456', OrderType.BUY, 25, 0.3),
-            new Order('0x123456', OrderType.SELL, 10, 0.8),
-            new Order('0x123456', OrderType.BUY, 50, 0.2),
-        ];
+
+        return state.buyOrders.concat(state.sellOrders);
     }
 
     /**
