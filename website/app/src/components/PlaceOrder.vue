@@ -3,15 +3,15 @@
     <p>My balance: {{ balance }}</p>
     {{ state.val }}
 
-    <input type="checkbox" name="type" v-model="priceType"/>
+    <input type="checkbox" name="type" v-model="isMarketPrice"/>
 
     <span>{{ orderTitle }}</span>
     <div>
-      <div v-if=priceType>
+      <div v-if=!isMarketPrice>
         <input type="number" name="ratio" v-model="ratio"/>
       </div>
       <input type="number" name="amount" v-model="amount"/>
-      <input type="checkbox" name="type" v-model="orderType"/>
+      <input type="checkbox" name="type" v-model="isBuyOrder"/>
 
       {{ disclaimerText }}
       <button name="submit" value="submit" v-bind:disabled="isLoading" v-on:click="submitOrder()">{{ !isLoading ? 'Place Order' : 'Pending...'}}</button>
@@ -30,24 +30,6 @@ import { StateManager } from '@/services/StateManager';
 import { Request } from '@/models/Request';
 import { RequestType } from '../constants/RequestType';
 
-enum ViewOrderType {
-  SELL = 0,
-  BUY = 1,
-}
-
-enum ViewPriceType {
-  FIXED = 0,
-  MARKET = 1,
-}
-
-function mapViewOrderTypeToOrderType(type: ViewOrderType) {
-  return type === ViewOrderType.BUY ? OrderType.BUY : OrderType.SELL;
-}
-
-function mapViewPriceTypeToRequestType(type: ViewPriceType) {
-  return type === ViewPriceType.FIXED ? RequestType.REGULAR : RequestType.MARKET;
-}
-
 @Component<PlaceOrder>({
   mounted() {
     const x = new Promise((resolve) => {
@@ -63,8 +45,8 @@ function mapViewPriceTypeToRequestType(type: ViewPriceType) {
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
   private amount: number = 1;
-  private orderType: ViewOrderType = ViewOrderType.BUY;
-  private priceType: ViewPriceType = ViewPriceType.FIXED;
+  private isBuyOrder: boolean = true;
+  private isMarketPrice: boolean = false;
   private isLoading: boolean = false;
 
   private info: string = '';
@@ -72,23 +54,21 @@ export default class PlaceOrder extends Vue {
   private state = StateManager.GetInstance().GetState();
 
   get orderTitle(): string {
-    if (this.priceType === ViewPriceType.FIXED) {
-      return "Place fixed price order";
-    }
-    else {
-      return "Place market price order";
+    if (!this.isMarketPrice) {
+      return 'Place fixed price order';
+    } else {
+      return 'Place market price order';
     }
   }
 
   get disclaimerText(): string {
-    if (this.priceType === ViewPriceType.FIXED) {
+    if (!this.isMarketPrice) {
       return `I want to ${
-        this.orderType === ViewOrderType.BUY ? 'buy' : 'sell'
+        this.isBuyOrder ? 'buy' : 'sell'
         } ${this.amount} of FC at ${this.ratio} ethers each`;
-    }
-    else {
+    } else {
       return `I want to ${
-        this.orderType === ViewOrderType.BUY ? 'buy' : 'sell'
+        this.isBuyOrder ? 'buy' : 'sell'
         } ${this.amount} of FC at the best current market price`;
     }
   }
@@ -101,8 +81,8 @@ export default class PlaceOrder extends Vue {
     this.isLoading = true;
 
     const request = new Request(
-      mapViewOrderTypeToOrderType(this.orderType),
-      mapViewPriceTypeToRequestType(this.priceType),
+      this.isBuyOrder ? OrderType.BUY : OrderType.SELL,
+      this.isMarketPrice ? RequestType.MARKET : RequestType.REGULAR,
       this.amount,
       this.ratio,
     );
