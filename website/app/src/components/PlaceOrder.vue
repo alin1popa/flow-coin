@@ -3,10 +3,15 @@
     <p>My balance: {{ balance }}</p>
     {{ state.val }}
 
-    <div v-if=true>
-      <input type="number" name="ratio" v-model="ratio"/>
+    <input type="checkbox" name="type" v-model="priceType"/>
+
+    <span>{{ orderTitle }}</span>
+    <div>
+      <div v-if=priceType>
+        <input type="number" name="ratio" v-model="ratio"/>
+      </div>
       <input type="number" name="amount" v-model="amount"/>
-      <input type="checkbox" name="type" v-model="type"/>
+      <input type="checkbox" name="type" v-model="orderType"/>
 
       {{ disclaimerText }}
       <button name="submit" value="submit" v-bind:disabled="isLoading" v-on:click="submitOrder()">{{ !isLoading ? 'Place Order' : 'Pending...'}}</button>
@@ -30,8 +35,17 @@ enum ViewOrderType {
   BUY = 1,
 }
 
+enum ViewPriceType {
+  FIXED = 0,
+  MARKET = 1,
+}
+
 function mapViewOrderTypeToOrderType(type: ViewOrderType) {
   return type === ViewOrderType.BUY ? OrderType.BUY : OrderType.SELL;
+}
+
+function mapViewPriceTypeToRequestType(type: ViewPriceType) {
+  return type === ViewPriceType.FIXED ? RequestType.REGULAR : RequestType.MARKET;
 }
 
 @Component<PlaceOrder>({
@@ -49,15 +63,34 @@ function mapViewOrderTypeToOrderType(type: ViewOrderType) {
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
   private amount: number = 1;
-  private type: ViewOrderType = ViewOrderType.BUY;
+  private orderType: ViewOrderType = ViewOrderType.BUY;
+  private priceType: ViewPriceType = ViewPriceType.FIXED;
   private isLoading: boolean = false;
 
   private info: string = '';
 
   private state = StateManager.GetInstance().GetState();
 
+  get orderTitle(): string {
+    if (this.priceType === ViewPriceType.FIXED) {
+      return "Place fixed price order";
+    }
+    else {
+      return "Place market price order";
+    }
+  }
+
   get disclaimerText(): string {
-    return `I want to ${this.type === ViewOrderType.BUY ? 'buy' : 'sell'} ${this.amount} of FC at ${this.ratio} ethers each`;
+    if (this.priceType === ViewPriceType.FIXED) {
+      return `I want to ${
+        this.orderType === ViewOrderType.BUY ? 'buy' : 'sell'
+        } ${this.amount} of FC at ${this.ratio} ethers each`;
+    }
+    else {
+      return `I want to ${
+        this.orderType === ViewOrderType.BUY ? 'buy' : 'sell'
+        } ${this.amount} of FC at the best current market price`;
+    }
   }
 
   get balance(): number {
@@ -68,8 +101,8 @@ export default class PlaceOrder extends Vue {
     this.isLoading = true;
 
     const request = new Request(
-      mapViewOrderTypeToOrderType(this.type),
-      RequestType.REGULAR,
+      mapViewOrderTypeToOrderType(this.orderType),
+      mapViewPriceTypeToRequestType(this.priceType),
       this.amount,
       this.ratio,
     );

@@ -95,3 +95,7 @@
 [DONE]  Create state arrays buy/sell orders
 [DONE]  Add past events to state arrays
 [DONE]  Add new events to state arrays
+[]      Orderbook action -> buy
+[]      Orderbook action -> sell
+[]      Connect -> Fill buy order
+[]      Connect -> Fill sell order
