@@ -25,6 +25,7 @@
 [DONE]  Connect - GetBalance
 [DONE]  Connect - GetMyOrders
 [DONE]  Connect - PlaceOrder
+[DONE]  Connect - PLace market order
 [DONE]  Connect - GetOrderbook
         Connect - GetPriceHistory
         Implement design / color palette
@@ -32,11 +33,12 @@
         Navbar - menu
         Navbar - show balance
         Navbar - show GetFC/GenerateFC buttons
+        Contract - create GenerateFC function
 [DONE]  Display - my balance
 [DONE]  Display - 1x my orders
 [DONE]  Display - my active orders
 [DONE]  Display - Place order
-        Display - Place market order
+[DONE]  Display - Place market order
 [DONE]  Display - 1x order from orderbook
 [DONE]  Display - all orders from orderbook
         Display - price history
@@ -99,3 +101,5 @@
 []      Orderbook action -> sell
 []      Connect -> Fill buy order
 []      Connect -> Fill sell order
+[]      Contract -> Update fill buy order to public & check
+[]      Contract -> Update fill sell order to public & check
