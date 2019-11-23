@@ -39,22 +39,42 @@ export class ContractService {
      * @param request Request
      */
     public static async PlaceOrderRequest(request: Request) {
-        // TODO
         const state = StateManager.GetInstance().GetState();
-        // const contract = EthereumHelper.GetReadWriteContract(state.provider);
         const contract = state.contract;
+        let tx;
 
-        const weiAmount = ethers.utils.parseEther(request.rate.toString());
+        if (request.requestType === RequestType.REGULAR) {
+            const weiAmount = ethers.utils.parseEther(request.rate.toString());
 
-        const overrides = {
-            value: weiAmount.mul(request.quantity),
-        };
-        const tx = await contract.placeBuyOrder(weiAmount, request.quantity, overrides);
+            if (request.orderType === OrderType.BUY) {
+                const overrides = {
+                    value: weiAmount.mul(request.quantity),
+                };
+                tx = await contract.placeBuyOrder(weiAmount, request.quantity, overrides);
+            } else {
+                tx = await contract.placeSellOrder(weiAmount, request.quantity);
+            }
+        } else if (request.requestType === RequestType.MARKET) {
+            if (request.orderType === OrderType.BUY) {
+                const orderList: any[] = []; // TODO
+                const maxPayment = ethers.utils.parseEther('0.05'); // TODO
+                const overrides = {
+                    value: maxPayment,
+                };
+                tx = await contract.buyFlow(request.quantity, orderList, overrides);
+            } else {
+                const orderList: any[] = []; // TODO
+                tx = await contract.sellFlow(request.quantity, orderList);
+            }
+        }
+
+        // tslint:disable-next-line
+        console.log('Order placed; transaction hash:');
         // tslint:disable-next-line
         console.log(tx.hash);
 
         await tx.wait();
-        state.val = 'MINED';
+        state.val = 'MINED'; // todo remove
     }
 
     /**
