@@ -29,22 +29,27 @@ export class Loader {
         // tslint:disable-next-line
         console.log("Initialized state");
 
-        // setup provider and contract
-        state.provider = EthereumHelper.GetInjectedProvider();
-        state.signer = EthereumHelper.GetSigner(state.provider);
-        state.contract = EthereumHelper.GetReadWriteContract(state.signer);
-        state.ownAddress = await EthereumHelper.GetCurrentUserAddress(state.signer);
+        try {
+            // setup provider and contract
+            state.provider = EthereumHelper.GetInjectedProvider();
+            state.signer = EthereumHelper.GetSigner(state.provider);
+            state.contract = EthereumHelper.GetReadWriteContract(state.signer);
+            state.ownAddress = await EthereumHelper.GetCurrentUserAddress(state.signer);
 
-        // tslint:disable-next-line
-        console.log("Initialized contract");
+            // tslint:disable-next-line
+            console.log("Initialized contract");
 
-        // process events and setup listeners
-        const eventListener = EventListener.GetInstance();
-        await eventListener.Initialize();
+            // process events and setup listeners
+            const eventListener = EventListener.GetInstance();
+            await eventListener.Initialize();
 
-        // tslint:disable-next-line
-        console.log("Initialized events");
+            // tslint:disable-next-line
+            console.log("Initialized events");
 
-        state.appLoaded = true;
+            state.appLoaded = true;
+        } catch (e) {
+            // tslint:disable-next-line
+            console.log(e);
+        }
     }
 }
