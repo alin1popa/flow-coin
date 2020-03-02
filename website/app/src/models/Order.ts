@@ -35,3 +35,8 @@ export class Order {
         }
     }
 }
+
+export interface Orderbook {
+    sellOrders: Order[];
+    buyOrders: Order[];
+}

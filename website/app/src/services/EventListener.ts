@@ -47,7 +47,7 @@ export class EventListener {
 
     private AddOrderToOwnOrdersIfNecessary(order: Order, state: IAppState) {
         if (order.address === state.ownAddress) {
-            state.ownOrders.push(order);
+            Utils.OrderInsertOrUpdate(order, state.ownOrders);
         }
     }
 

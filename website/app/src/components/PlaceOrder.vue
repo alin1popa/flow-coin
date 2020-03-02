@@ -29,6 +29,7 @@ import { ContractService } from '@/services/ContractService';
 import { StateManager } from '@/services/StateManager';
 import { Request } from '@/models/Request';
 import { RequestType } from '../constants/RequestType';
+import { parseEther, bigNumberify } from 'ethers/utils';
 
 @Component<PlaceOrder>({
   mounted() {
@@ -83,8 +84,8 @@ export default class PlaceOrder extends Vue {
     const request = new Request(
       this.isBuyOrder ? OrderType.BUY : OrderType.SELL,
       this.isMarketPrice ? RequestType.MARKET : RequestType.REGULAR,
-      this.amount,
-      this.ratio,
+      bigNumberify(this.amount.toString()),
+      parseEther(this.ratio.toString()),
     );
 
     ContractService.PlaceOrderRequest(request);

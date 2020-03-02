@@ -31,6 +31,9 @@ export class Utils {
 
         if (index < array.length && index >= 0 && order.equalTo(array[index])) {
             array[index] = order;
+            if (order.quantity.isZero()) {
+                array.splice(index, 1);
+            }
         } else {
             array.splice(index, 0, order);
         }

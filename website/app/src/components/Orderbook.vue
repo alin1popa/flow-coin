@@ -1,15 +1,22 @@
 <template>
   <div class="orderbook">
     <div class="orderbook__list">
-      <div class="orderbook__item" v-for="order in orderbook" v-bind:key="order.id">
+      <div class="orderbook__item" v-for="order in buyOrders" v-bind:key="order.id">
         <span class="orderbook__item__address">{{ order.address }} </span>
-        <span class="orderbook__item__type">{{ order.type + "s" }}</span> 
+        <span class="orderbook__item__type">buys</span> 
         <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
         <span class="orderbook__item__rate">{{ displayRate(order.rate) }} ETH/FC</span>
-        <span class="orderbook__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
       </div>
     </div>
 
+    <div class="orderbook__list">
+      <div class="orderbook__item" v-for="order in sellOrders" v-bind:key="order.id">
+        <span class="orderbook__item__address">{{ order.address }} </span>
+        <span class="orderbook__item__type">sells</span> 
+        <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
+        <span class="orderbook__item__rate">{{ displayRate(order.rate) }} ETH/FC</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,16 +34,18 @@ import { utils } from 'ethers';
 export default class Orderbook extends Vue {
   private state = StateManager.GetInstance().GetState();
 
-  get orderbook(): Order[] {
-    return ContractService.GetOrderbook(this.state);
+  get buyOrders(): Order[] {
+     const orderbook = ContractService.GetOrderbook(this.state);
+     return orderbook.buyOrders;
+  }
+
+  get sellOrders(): Order[] {
+    const orderbook = ContractService.GetOrderbook(this.state);
+    return orderbook.sellOrders;
   }
 
   public displayRate(rate: BigNumber) {
     return utils.formatUnits(rate, 'ether');
-  }
-
-  public actionClicked(order: Order) {
-    alert(JSON.stringify(order));
   }
 }
 </script>
@@ -50,6 +59,14 @@ export default class Orderbook extends Vue {
 
 .orderbook__list {
   background-color: lightblue;
+  border: 1px solid black;
+  height: calc(50% - 10px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.orderbook__list:first-of-type {
+  margin-bottom: 10px;
 }
 
 .orderbook__item span {

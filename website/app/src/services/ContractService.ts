@@ -1,4 +1,4 @@
-import { Order } from '@/models/Order';
+import { Order, Orderbook } from '@/models/Order';
 import { OrderType } from '@/constants/OrderType';
 import { Request } from '@/models/Request';
 import { RequestType } from '@/constants/RequestType';
@@ -44,7 +44,7 @@ export class ContractService {
         let tx;
 
         if (request.requestType === RequestType.REGULAR) {
-            const weiAmount = ethers.utils.parseEther(request.rate.toString());
+            const weiAmount = request.rate;
 
             if (request.orderType === OrderType.BUY) {
                 const overrides = {
@@ -66,6 +66,14 @@ export class ContractService {
                 const orderList: any[] = []; // TODO
                 tx = await contract.sellFlow(request.quantity, orderList);
             }
+        } else if (request.requestType === RequestType.RETRACT) {
+            const weiAmount = request.rate;
+
+            if (request.orderType === OrderType.SELL) {
+                tx = await contract.retractSellOrder(weiAmount, request.quantity);
+            } else {
+                tx = await contract.retractBuyOrder(weiAmount, request.quantity);
+            }
         }
 
         // tslint:disable-next-line
@@ -78,13 +86,28 @@ export class ContractService {
     }
 
     /**
+     * @description Places an order request
+     * @param request Request
+     */
+    public static async RetractOrder(order: Order) {
+        const request: Request = {
+            orderType: order.type,
+            quantity: order.quantity,
+            rate: order.rate,
+            requestType: RequestType.RETRACT,
+        };
+        this.PlaceOrderRequest(request);
+    }
+
+    /**
      * @description Gets all active orders for all accounts
      * @returns Order[]
      */
-    public static GetOrderbook(state: IAppState): Order[] {
-        // TODO
-
-        return state.buyOrders.concat(state.sellOrders);
+    public static GetOrderbook(state: IAppState): Orderbook {
+        return {
+            buyOrders: state.buyOrders,
+            sellOrders: state.sellOrders,
+        };
     }
 
     /**

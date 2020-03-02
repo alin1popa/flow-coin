@@ -27,7 +27,7 @@
 [DONE]  Connect - PlaceOrder
 [DONE]  Connect - PLace market order
 [DONE]  Connect - GetOrderbook
-        Connect - GetPriceHistory
+[NOPE]  Connect - GetPriceHistory
         Implement design / color palette
         Add navbar
         Navbar - menu
@@ -41,13 +41,14 @@
 [DONE]  Display - Place market order
 [DONE]  Display - 1x order from orderbook
 [DONE]  Display - all orders from orderbook
-        Display - price history
+[NOPE]  Display - price history
+        Display - console log
         Other pages
 [DONE]  Create TODO list
-        Orderbook - lib - group buy orders and sell orders
-        Orderbook - lib - sort orders by rate
-        Orderbook - display - half screen buy, half screen sell
-        Orderbook - display - set scroll on both sides
+[DONE]  Orderbook - lib - group buy orders and sell orders
+[DONE]  Orderbook - lib - sort orders by rate
+[DONE]  Orderbook - display - half screen buy, half screen sell
+[DONE]  Orderbook - display - set scroll on both sides
         Orderbook - display - pre-set scroll position to last on the buy side
 [DONE]  Contract - interface for token generation with limit
 [DONE]  Contract - implement interface for token
@@ -57,10 +58,10 @@
         Contract check - can retract a buy order
         Contract check - can put a sell order
         Contract check - can retract a sell order
-        Contract check - can fill a buy order
-        Contract check - can fill a sell order
-        Contract check - can fill 2 buy orders
-        Contract check - can fill 2 sell orders
+[NOPE]  Contract check - can fill a buy order
+[NOPE]  Contract check - can fill a sell order
+[NOPE]  Contract check - can fill 2 buy orders
+[NOPE]  Contract check - can fill 2 sell orders
 [DONE]  Contract - publish on ropsten (no code)
 [DONE]  State manager - singleton
 [DONE]  State manager - state component
@@ -72,7 +73,7 @@
 [DONE]  EthHelper get latest block B
 [DONE]  EthHelper get event history up to B (event logs)
 [DONE]  EthHelper get event type by its topic
-        Figure out if Settle event needed for price (diff between retracting order and settling)
+[NOPE]  Figure out if Settle event needed for price (diff between retracting order and settling)
 [DONE]  Create EventListener class
 [DONE]  EventListener get latest block B
 [DONE]  EventListener get event history
@@ -97,9 +98,9 @@
 [DONE]  Create state arrays buy/sell orders
 [DONE]  Add past events to state arrays
 [DONE]  Add new events to state arrays
-[]      Orderbook action -> buy
-[]      Orderbook action -> sell
-[]      Connect -> Fill buy order
-[]      Connect -> Fill sell order
-[]      Contract -> Update fill buy order to public & check
-[]      Contract -> Update fill sell order to public & check
+[DONE]  Orderbook action -> buy
+[DONE]  Orderbook action -> sell
+[NOPE]  Connect -> Fill buy order
+[NOPE]  Connect -> Fill sell order
+[NOPE]  Contract -> Update fill buy order to public & check
+[NOPE]  Contract -> Update fill sell order to public & check

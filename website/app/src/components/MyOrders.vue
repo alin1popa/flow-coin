@@ -8,7 +8,7 @@
         <span class="myorders__item__type">{{ order.type + "s" }}</span> 
         <span class="myorders__item__quantity">{{ order.quantity }} FC</span>
         <span class="myorders__item__rate">@ {{ order.rate }} ETH/FC</span>
-        <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Action</button></span>
+        <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
       </div>
     </div>
 
@@ -48,7 +48,7 @@ export default class MyOrders extends Vue {
   }
 
   public actionClicked(order: Order) {
-    alert(JSON.stringify(order));
+    ContractService.RetractOrder(order);
   }
 }
 </script>
