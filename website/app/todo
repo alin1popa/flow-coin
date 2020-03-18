@@ -1,4 +1,4 @@
-        Select color palette
+[DONE]  Select color palette
 [DONE]  Post contract to testnet
 [DONE]  Figure out how to install/use a js eth lib
 [DONE]  Figure out how to get data from contract
@@ -28,7 +28,7 @@
 [DONE]  Connect - PLace market order
 [DONE]  Connect - GetOrderbook
 [NOPE]  Connect - GetPriceHistory
-        Implement design / color palette
+[DONE]  Implement design / color palette
         Add navbar
         Navbar - menu
         Navbar - show balance
@@ -54,10 +54,10 @@
 [DONE]  Contract - implement interface for token
 [DONE]  Contract - check syntax in remix
 [DONE]  Contract - check works in remix
-        Contract check - can put a buy order
-        Contract check - can retract a buy order
-        Contract check - can put a sell order
-        Contract check - can retract a sell order
+[DONE]  Contract check - can put a buy order
+[DONE]  Contract check - can retract a buy order
+[DONE]  Contract check - can put a sell order
+[DONE]  Contract check - can retract a sell order
 [NOPE]  Contract check - can fill a buy order
 [NOPE]  Contract check - can fill a sell order
 [NOPE]  Contract check - can fill 2 buy orders
@@ -83,7 +83,7 @@
 [NOPE]  EventListener map history to Map<...> (and update stuff)
 [NOPE]  EventListener convert Map<...> to state.Orders[]
 [NOPE]  EventListener update Map<...> to contain Order[] index
-        Convert units for orders (don't want to display 10^21381798320 wei)
+[DONE]  Convert units for orders (don't want to display 10^21381798320 wei)
 [DONE]  Move GetProvider to separate function
 [DONE]  Remove provider from readwrite contract
 [DONE]  Create singleton Loader instance
@@ -104,3 +104,11 @@
 [NOPE]  Connect -> Fill sell order
 [NOPE]  Contract -> Update fill buy order to public & check
 [NOPE]  Contract -> Update fill sell order to public & check
+        Redo heights for all panels
+        Create console panel
+        Display things in the console
+        Console design
+        Format numbers in my orders
+        Align columns in my orders
+        Redesign scrollbar
+        
