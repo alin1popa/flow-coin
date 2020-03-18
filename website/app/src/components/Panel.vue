@@ -26,6 +26,7 @@ export default class Panel extends Vue {
 h1 {
   margin: 0;
   height: 40px;
+  color: #41D8E8;
 }
 .panel {
   height: 100%;
@@ -33,9 +34,9 @@ h1 {
   padding: 10px;
 }
 .panel__wrapper {
-  height: calc(100% - 20px);
-  border: 1px solid darkslategray;
-  border-radius: 6px;
-  background-color: white;
+  height: calc(100% - 30px);
+  border: 1px solid #B63DFF;
+  border-radius: 10px;
+  padding-top: 10px;
 }
 </style>

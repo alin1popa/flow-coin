@@ -32,5 +32,6 @@
 
 html,body {
   padding: 10px;
+  background-color: #313132;
 }
 </style>
