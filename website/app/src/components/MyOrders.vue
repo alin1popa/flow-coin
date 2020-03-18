@@ -1,8 +1,5 @@
 <template>
   <div class="myorders">
-    <p>My balance: {{ balance }}</p>
-    {{ state.val }}
-
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
         <span class="myorders__item__type">{{ order.type === "buy" ? "buy" : "sell" }}</span> 

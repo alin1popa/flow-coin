@@ -1,4 +1,6 @@
 import { Order } from '@/models/Order';
+import { utils } from 'ethers';
+import { BigNumber } from 'ethers/utils';
 
 export class Utils {
     public static OrderInsertOrUpdate(order: Order, array: Order[]) {
@@ -37,5 +39,38 @@ export class Utils {
         } else {
             array.splice(index, 0, order);
         }
+    }
+
+    public static FormatAddressForDisplay(address: string): string {
+        return address.slice(0, 4) + '..' + address.slice(-4, -1);
+    }
+
+    public static ComputeOptimalPriceUnit(price: BigNumber): string {
+        const units = ['wei', 'kwei', 'mwei', 'gwei', 'ether'];
+
+        let index = 0;
+        let converted: string;
+        while (index < units.length) {
+            converted = utils.formatUnits(price, units[index]);
+            const decimalIndex = converted.indexOf('.');
+            if (!(decimalIndex === undefined || decimalIndex > 3)) {
+                break;
+            }
+            index++;
+        }
+        if (index === units.length) {
+            index--;
+        }
+
+        return units[index];
+    }
+
+    public static FormatFCCountForDisplay(count: BigNumber): string {
+        const str = count.toString();
+        if (str.length <= 6) {
+            return str;
+        }
+
+        return str[0] + '.' + str.slice(1, 3) + 'E+' + (str.length - 1).toString();
     }
 }

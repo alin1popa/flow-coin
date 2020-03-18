@@ -81,7 +81,6 @@ export default class PlaceOrder extends Vue {
   }
 
   get disclaimerText(): string {
-    console.log(this.isMarketPrice);
     if (!this.isMarketPrice) {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'

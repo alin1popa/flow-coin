@@ -2,19 +2,19 @@
   <div class="orderbook">
     <div class="orderbook__list">
       <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders" v-bind:key="order.id">
-        <span class="orderbook__item__address">{{ order.address }} </span>
-        <span class="orderbook__item__type">sells</span> 
-        <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
-        <span class="orderbook__item__rate">{{ displayRate(order.rate) }} ETH/FC</span>
+        <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
+        <span class="orderbook__item__type"><span class="orderbook__item__typelabel">sells</span></span> 
+        <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
 
     <div class="orderbook__list">
       <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders" v-bind:key="order.id">
-        <span class="orderbook__item__address">{{ order.address }} </span>
-        <span class="orderbook__item__type">buys</span> 
-        <span class="orderbook__item__quantity">{{ order.quantity }} FC</span>
-        <span class="orderbook__item__rate">{{ displayRate(order.rate) }} ETH/FC</span>
+        <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
+        <span class="orderbook__item__type"><span class="orderbook__item__typelabel">buys</span></span> 
+        <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
   </div>
@@ -28,6 +28,7 @@ import { OrderType } from '@/constants/OrderType';
 import { ContractService } from '@/services/ContractService';
 import { StateManager } from '@/services/StateManager';
 import { BigNumber } from 'ethers/utils';
+import * as Helper from '@/helpers/Utils'; 
 import { utils } from 'ethers';
 
 @Component
@@ -44,8 +45,20 @@ export default class Orderbook extends Vue {
     return orderbook.sellOrders;
   }
 
+  public rateUnit(rate: BigNumber) {
+    return Helper.Utils.ComputeOptimalPriceUnit(rate);
+  }
+
+  public displayQuantity(quantity: BigNumber) {
+    return Helper.Utils.FormatFCCountForDisplay(quantity);
+  }
+
   public displayRate(rate: BigNumber) {
-    return utils.formatUnits(rate, 'ether');
+    return utils.formatUnits(rate, this.rateUnit(rate));
+  }
+
+  public displayAddress(address: string) {
+    return Helper.Utils.FormatAddressForDisplay(address);
   }
 }
 </script>
@@ -72,8 +85,12 @@ export default class Orderbook extends Vue {
 }
 
 .orderbook__item {
-  padding-top: 3px;
+  padding-top: 5px;
   padding-bottom: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .orderbook__item--buy span {
@@ -89,14 +106,16 @@ export default class Orderbook extends Vue {
 }
 
 .orderbook__item__address {
-  width: 35%;
+  width: 25%;
 }
 
 .orderbook__item__type {
-  width: 15%;
+  width: 25%;
+  position:relative;
+  left: 10px;
 }
 
-.orderbook__item--buy .orderbook__item__type {
+.orderbook__item--buy .orderbook__item__typelabel {
   background-color: #41D8E8;
   color: #313132;
   border-radius: 3px;
@@ -105,7 +124,7 @@ export default class Orderbook extends Vue {
   display: inline-block;
 }
 
-.orderbook__item--sell .orderbook__item__type {
+.orderbook__item--sell .orderbook__item__typelabel {
   background-color: #47FFAE;
   color: #313132;
   border-radius: 3px;
@@ -115,10 +134,19 @@ export default class Orderbook extends Vue {
 }
 
 .orderbook__item__quantity {
-  width: 10%;
+  width: 25%;
 }
 
 .orderbook__item__rate {
   width: 25%;
+}
+
+.orderbook__item__unit {
+  font-size: 11px;
+}
+
+.orderbook__item__number {
+  display: block;
+  width: 100%;
 }
 </style>
