@@ -30,7 +30,7 @@
         <div class="col-xs-12
                     col-sm-12
                     col-md-12 col">
-          <Panel title="Console log" class="box" id="panel-history">
+          <Panel title="Console" class="box" id="panel-history">
             <Orderbook/>
           </Panel>
         </div>

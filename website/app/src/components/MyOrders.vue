@@ -5,7 +5,7 @@
 
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
-        <span class="myorders__item__type">{{ order.type === "buy" ? "BUY" : "SELL" }}</span> 
+        <span class="myorders__item__type">{{ order.type === "buy" ? "buy" : "sell" }}</span> 
         <span class="myorders__item__quantity">{{ order.quantity }} FC</span>
         <span class="myorders__item__rate">@ {{ order.rate }} ETH/FC</span>
         <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
@@ -84,12 +84,18 @@ export default class MyOrders extends Vue {
   background-color: #41D8E8;
   color: #313132;
   border-radius: 3px;
+
+  width: 50px;
+  display: inline-block;
 }
 
 .myorders__item--sell .myorders__item__type {
   background-color: #47FFAE;
   color: #313132;
   border-radius: 3px;
+
+  width: 50px;
+  display: inline-block;
 }
 
 .myorders__item span {
@@ -127,6 +133,7 @@ export default class MyOrders extends Vue {
   border-radius: 5px;
   color: white;
   font-weight: bold;
+  font-size: 14px;
 }
 
 </style>

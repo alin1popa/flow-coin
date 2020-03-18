@@ -100,12 +100,18 @@ export default class Orderbook extends Vue {
   background-color: #41D8E8;
   color: #313132;
   border-radius: 3px;
+
+  width: 50px;
+  display: inline-block;
 }
 
 .orderbook__item--sell .orderbook__item__type {
   background-color: #47FFAE;
   color: #313132;
   border-radius: 3px;
+
+  width: 50px;
+  display: inline-block;
 }
 
 .orderbook__item__quantity {
