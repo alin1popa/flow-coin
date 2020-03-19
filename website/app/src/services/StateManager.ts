@@ -1,6 +1,14 @@
 import { Order } from '@/models/Order';
 
 /**
+ * @description Log object
+ */
+export interface ILog {
+    id: number;
+    text: string;
+}
+
+/**
  * @description State interface
  */
 export interface IAppState {
@@ -13,6 +21,7 @@ export interface IAppState {
     sellOrders: Order[];
     ownAddress: string;
     ownOrders: Order[];
+    logs: ILog[];
 }
 
 /**
@@ -39,6 +48,7 @@ export class StateManager {
         sellOrders: [],
         ownOrders: [],
         ownAddress: '',
+        logs: [],
     };
 
     private constructor() {}

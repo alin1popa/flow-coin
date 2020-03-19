@@ -6,6 +6,7 @@ import { PriceHistory, PriceAtMoment } from '@/models/PriceHistory';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
 import { StateManager, IAppState } from '@/services/StateManager';
 import { ethers } from 'ethers';
+import { Utils } from '@/helpers/Utils';
 
 export class ContractService {
     /**
@@ -76,10 +77,8 @@ export class ContractService {
             }
         }
 
-        // tslint:disable-next-line
-        console.log('Order placed; transaction hash:');
-        // tslint:disable-next-line
-        console.log(tx.hash);
+        Utils.LogText('Order placed; transaction hash:');
+        Utils.LogText(tx.hash);
 
         await tx.wait();
         state.val = 'MINED'; // todo remove

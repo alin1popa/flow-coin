@@ -2,6 +2,7 @@ import { Event } from '@/models/Event';
 import { EthereumHelper } from '@/helpers/EthereumHelper';
 import { StateManager } from '@/services/StateManager';
 import { EventListener } from '@/services/EventListener';
+import { Utils } from '@/helpers/Utils';
 
 /**
  * @description Global loader service
@@ -26,8 +27,7 @@ export class Loader {
             return;
         }
 
-        // tslint:disable-next-line
-        console.log("Initialized state");
+        Utils.LogText('Initialized state');
 
         try {
             // setup provider and contract
@@ -36,20 +36,17 @@ export class Loader {
             state.contract = EthereumHelper.GetReadWriteContract(state.signer);
             state.ownAddress = await EthereumHelper.GetCurrentUserAddress(state.signer);
 
-            // tslint:disable-next-line
-            console.log("Initialized contract");
+            Utils.LogText('Initialized contract');
 
             // process events and setup listeners
             const eventListener = EventListener.GetInstance();
             await eventListener.Initialize();
 
-            // tslint:disable-next-line
-            console.log("Initialized events");
+            Utils.LogText('Initialized events');
 
             state.appLoaded = true;
         } catch (e) {
-            // tslint:disable-next-line
-            console.log(e);
+            Utils.LogText(e);
         }
     }
 }

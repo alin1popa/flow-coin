@@ -1,6 +1,7 @@
 import { Order } from '@/models/Order';
 import { utils } from 'ethers';
 import { BigNumber } from 'ethers/utils';
+import { IAppState, ILog, StateManager } from '@/services/StateManager';
 
 export class Utils {
     public static OrderInsertOrUpdate(order: Order, array: Order[]) {
@@ -72,5 +73,16 @@ export class Utils {
         }
 
         return str[0] + '.' + str.slice(1, 3) + 'E+' + (str.length - 1).toString();
+    }
+
+    public static LogText(text: string) {
+        const state = StateManager.GetInstance().GetState();
+        const newlog: ILog = {
+            id: state.logs.length,
+            text,
+        };
+        state.logs.push(newlog);
+        // tslint:disable-next-line:no-console
+        console.log(text);
     }
 }

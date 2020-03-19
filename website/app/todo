@@ -105,12 +105,14 @@
 [NOPE]  Contract -> Update fill buy order to public & check
 [NOPE]  Contract -> Update fill sell order to public & check
         Redo heights for all panels
-        Create console panel
-        Display things in the console
-        Console design
+[DONE]  Create console panel
+[DONE]  Display things in the console
+[DONE]  Console design
 [DONE]  Format numbers in my orders
 [DONE]  Align columns in my orders
         Redesign scrollbar https://css-tricks.com/custom-scrollbars-in-webkit/
         Set overflow auto on panels
 [DONE]  Small margin at left of addresses
         use other font for titles
+        Price when limit order => dropdown for unit
+        orderbook - buy - only sort once, not in place

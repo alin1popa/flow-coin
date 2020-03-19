@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { EventType } from '@/constants/EventType';
 import { Event } from '@/models/Event';
+import { Utils } from '@/helpers/Utils';
 // tslint:disable-next-line
 const abi = require('@/assets/contract_abi.json');
 
@@ -55,10 +56,8 @@ export class EthereumHelper {
         } else {
             // TODO throw error
 
-            // tslint:disable-next-line
-            console.log('ERROR: Injected Web3 not found');
-            // tslint:disable-next-line
-            console.log('Please install MetaMask and allow the dApp to interact with your address.');
+            Utils.LogText('ERROR: Injected Web3 not found');
+            Utils.LogText('Please install MetaMask and allow the dApp to interact with your address.');
         }
 
         const provider = new ethers.providers.Web3Provider(injectedProvider);

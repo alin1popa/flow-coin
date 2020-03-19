@@ -24,25 +24,27 @@ export class EventListener {
     private constructor() {}
 
     public async Initialize() {
+        Utils.LogText('Initializing event listener service...');
         const state = StateManager.GetInstance().GetState();
 
         // get curret block number
         const latestBlock = await state.provider.getBlockNumber();
+        Utils.LogText('Latest ethereum block found: ' + latestBlock);
 
         // process past events
+        Utils.LogText('Processing past event history...');
         const eventLogs: any[] = await EthereumHelper.GetEventHistory(state.provider, latestBlock);
         const eventHistory: Event[] = eventLogs.map((log) => EthereumHelper.ClassifyEventByTopic(state.contract, log));
         eventHistory.forEach((event: Event) => this.ProcessEvent(event, state));
+        Utils.LogText('Processed ' + eventHistory.length + ' events');
 
-        // tslint:disable-next-line
-        console.log(state.buyOrders[1].greaterThan(state.buyOrders[0]));
-
-        // tslint:disable-next-line
-        console.log(JSON.stringify(eventLogs));
+        Utils.LogText('Last 10 logs: ' + JSON.stringify(eventHistory.slice(-10)));
 
         // set up event listeners for future events
+        Utils.LogText('Resetting events starting at block ' + (latestBlock + 1));
         state.provider.resetEventsBlock(latestBlock + 1);
         this.SetUpEventListeners(state.contract);
+        Utils.LogText('Event listener service initialized successfully');
     }
 
     private AddOrderToOwnOrdersIfNecessary(order: Order, state: IAppState) {
@@ -83,8 +85,7 @@ export class EventListener {
             const event = new Event(EventType.SELL, address, ratio, amount);
             const state = StateManager.GetInstance().GetState();
 
-            // tslint:disable-next-line
-            console.log(JSON.stringify(event));
+            Utils.LogText('New event: ' + JSON.stringify(event));
 
             this.ProcessSellEvent(event, state);
         });
@@ -93,8 +94,7 @@ export class EventListener {
             const event = new Event(EventType.BUY, address, ratio, amount);
             const state = StateManager.GetInstance().GetState();
 
-            // tslint:disable-next-line
-            console.log(JSON.stringify(event));
+            Utils.LogText('New event: ' + JSON.stringify(event));
 
             this.ProcessBuyEvent(event, state);
         });

@@ -31,7 +31,7 @@
                     col-sm-12
                     col-md-12 col">
           <Panel title="Console" class="box" id="panel-history">
-            <Orderbook/>
+            <Console/>
           </Panel>
         </div>
       </div>
@@ -45,6 +45,7 @@ import Panel from '@/components/Panel.vue';
 import Orderbook from '@/components/Orderbook.vue';
 import MyOrders from '@/components/MyOrders.vue';
 import PlaceOrder from '@/components/PlaceOrder.vue';
+import Console from '@/components/Console.vue';
 import { StateManager } from '@/services/StateManager.ts';
 import { Loader } from '@/services/Loader.ts';
 
@@ -54,6 +55,7 @@ import { Loader } from '@/services/Loader.ts';
     Orderbook,
     MyOrders,
     PlaceOrder,
+    Console,
   },
   mounted() {
     Loader.GetInstance().LoadApp();
