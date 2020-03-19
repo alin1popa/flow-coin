@@ -34,6 +34,7 @@ export default class MyOrders extends Vue {
 .console {
   font-family: 'Courier New', Courier, monospace;
   text-align: left;
+  font-size: 12px;
   color: #5498FF;
 }
 

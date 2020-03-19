@@ -139,6 +139,8 @@ export default class PlaceOrder extends Vue {
 
 .place-order__disclaimer {
   font-size: 12px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .sell_label {

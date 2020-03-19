@@ -42,7 +42,7 @@
 [DONE]  Display - 1x order from orderbook
 [DONE]  Display - all orders from orderbook
 [NOPE]  Display - price history
-        Display - console log
+[DONE]  Display - console log
         Other pages
 [DONE]  Create TODO list
 [DONE]  Orderbook - lib - group buy orders and sell orders
@@ -113,6 +113,9 @@
         Redesign scrollbar https://css-tricks.com/custom-scrollbars-in-webkit/
         Set overflow auto on panels
 [DONE]  Small margin at left of addresses
-        use other font for titles
+[DONE]  use other font for titles
         Price when limit order => dropdown for unit
         orderbook - buy - only sort once, not in place
+        orderbook - has different width than others
+        console - autoscroll to last position
+        order - on click - see exact details in console

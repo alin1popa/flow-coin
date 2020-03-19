@@ -14,14 +14,14 @@
         <div class="col-xs-12
                     col-sm-6
                     col-md-6 col">
-          <Panel title="Place order" class="box" id="panel-placeorder">
+          <Panel title="New order" class="box" id="panel-placeorder">
             <PlaceOrder/>
           </Panel>
         </div>
         <div class="col-xs-12
                     col-sm-6
                     col-md-6 col">
-          <Panel title="My orders" class="box" id="panel-myorders">
+          <Panel title="Active orders" class="box" id="panel-myorders">
             <MyOrders/>
           </Panel>
         </div>
@@ -30,7 +30,7 @@
         <div class="col-xs-12
                     col-sm-12
                     col-md-12 col">
-          <Panel title="Console" class="box" id="panel-history">
+          <Panel title="Log info" class="box" id="panel-history">
             <Console/>
           </Panel>
         </div>

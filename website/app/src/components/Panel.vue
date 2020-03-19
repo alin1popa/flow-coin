@@ -27,6 +27,7 @@ h1 {
   margin: 0;
   height: 40px;
   color: #41D8E8;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 .panel {
   height: 100%;
@@ -38,5 +39,6 @@ h1 {
   border: 1px solid #B63DFF;
   border-radius: 10px;
   padding-top: 10px;
+  padding-bottom: 5px;
 }
 </style>
