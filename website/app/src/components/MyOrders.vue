@@ -2,9 +2,9 @@
   <div class="myorders">
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
-        <span class="myorders__item__type">{{ order.type === "buy" ? "buy" : "sell" }}</span> 
-        <span class="myorders__item__quantity">{{ order.quantity }} FC</span>
-        <span class="myorders__item__rate">@ {{ order.rate }} ETH/FC</span>
+        <span class="myorders__item__type"><span class="myorders__item__typelabel">{{ order.type === "buy" ? "buy" : "sell" }}</span></span> 
+        <span class="myorders__item__quantity"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
+        <span class="myorders__item__rate"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
         <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
       </div>
     </div>
@@ -19,6 +19,9 @@ import { Order } from '@/models/Order';
 import { OrderType } from '@/constants/OrderType';
 import { ContractService } from '@/services/ContractService';
 import { StateManager } from '@/services/StateManager';
+import { utils } from 'ethers';
+import { BigNumber } from 'ethers/utils';
+import * as Helper from '@/helpers/Utils';
 
 @Component<MyOrders>({
   mounted() {
@@ -44,6 +47,18 @@ export default class MyOrders extends Vue {
     return ContractService.GetActiveOrders(this.state);
   }
 
+  public rateUnit(rate: BigNumber) {
+    return Helper.Utils.ComputeOptimalPriceUnit(rate);
+  }
+
+  public displayQuantity(quantity: BigNumber) {
+    return Helper.Utils.FormatFCCountForDisplay(quantity);
+  }
+
+  public displayRate(rate: BigNumber) {
+    return utils.formatUnits(rate, this.rateUnit(rate));
+  }
+
   public actionClicked(order: Order) {
     ContractService.RetractOrder(order);
   }
@@ -61,8 +76,12 @@ export default class MyOrders extends Vue {
 
 .myorders__item {
   /* border-bottom: 1px solid black; */
-  padding-top: 3px;
+  padding-top: 5px;
   padding-bottom: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .myorders__item:nth-of-type(2n+1) {
@@ -77,7 +96,7 @@ export default class MyOrders extends Vue {
   color: #47FFAE;
 }
 
-.myorders__item--buy .myorders__item__type {
+.myorders__item--buy .myorders__item__typelabel {
   background-color: #41D8E8;
   color: #313132;
   border-radius: 3px;
@@ -86,7 +105,7 @@ export default class MyOrders extends Vue {
   display: inline-block;
 }
 
-.myorders__item--sell .myorders__item__type {
+.myorders__item--sell .myorders__item__typelabel {
   background-color: #47FFAE;
   color: #313132;
   border-radius: 3px;
@@ -100,19 +119,14 @@ export default class MyOrders extends Vue {
   font-weight: bold;
 }
 
-.myorders__item__address {
-  /* color: #41D8E8; */
-  width: 35%;
-}
-
 .myorders__item__type {
   /* background-color: #47FFAE; */
-  width: 15%;
+  width: 25%;
 }
 
 .myorders__item__quantity {
   /* color: #41D8E8; */
-  width: 10%;
+  width: 15%;
 }
 
 .myorders__item__rate {
@@ -121,7 +135,7 @@ export default class MyOrders extends Vue {
 }
 
 .myorders__item__action {
-  width: 15%;
+  width: 35%;
 }
 
 .myorders__item button {
@@ -131,6 +145,15 @@ export default class MyOrders extends Vue {
   color: white;
   font-weight: bold;
   font-size: 14px;
+}
+
+.myorders__item__unit {
+  font-size: 11px;
+}
+
+.myorders__item__number {
+  display: block;
+  width: 100%;
 }
 
 </style>

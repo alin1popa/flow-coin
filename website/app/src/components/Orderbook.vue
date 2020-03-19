@@ -37,7 +37,7 @@ export default class Orderbook extends Vue {
 
   get buyOrders(): Order[] {
      const orderbook = ContractService.GetOrderbook(this.state);
-     return orderbook.buyOrders;
+     return orderbook.buyOrders.reverse();
   }
 
   get sellOrders(): Order[] {
@@ -107,6 +107,7 @@ export default class Orderbook extends Vue {
 
 .orderbook__item__address {
   width: 25%;
+  margin-left: 5px;
 }
 
 .orderbook__item__type {

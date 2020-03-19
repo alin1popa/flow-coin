@@ -108,7 +108,9 @@
         Create console panel
         Display things in the console
         Console design
-        Format numbers in my orders
-        Align columns in my orders
-        Redesign scrollbar
-        
+[DONE]  Format numbers in my orders
+[DONE]  Align columns in my orders
+        Redesign scrollbar https://css-tricks.com/custom-scrollbars-in-webkit/
+        Set overflow auto on panels
+[DONE]  Small margin at left of addresses
+        use other font for titles
