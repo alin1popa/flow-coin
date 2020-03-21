@@ -4,6 +4,7 @@ import { Order } from '@/models/Order';
  * @description Log object
  */
 export interface ILog {
+    time: string;
     id: number;
     text: string;
 }

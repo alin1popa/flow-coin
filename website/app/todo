@@ -116,7 +116,7 @@
 [DONE]  use other font for titles
         Price when limit order => dropdown for unit
 [DONE]  orderbook - buy - only sort once, not in place
-        orderbook - has different width than others
-        console - autoscroll to last position
+[DONE]  orderbook - has different width than others
+[DONE]  console - autoscroll to last position
         order - on click - see exact details in console
 [DONE]  navbar design

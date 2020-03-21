@@ -77,6 +77,10 @@ export default class Dashboard extends Vue {
 .col {
   padding: 0;
 }
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
 
 #dashboard__orderbook {
   height: calc(100vh - 60px);

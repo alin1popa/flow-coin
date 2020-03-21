@@ -78,6 +78,7 @@ export class Utils {
     public static LogText(text: string) {
         const state = StateManager.GetInstance().GetState();
         const newlog: ILog = {
+            time: new Date().toLocaleTimeString(),
             id: state.logs.length,
             text,
         };

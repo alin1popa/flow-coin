@@ -1,7 +1,7 @@
 <template>
-  <div class="console">
+  <div class="console" id="console">
     <div class="console__item" v-for="log in logs" v-bind:key="log.id">
-      {{ log.text }}
+      <span class="console__datetime">{{ log.time }}:</span> {{ log.text }}
     </div>
   </div>
 </template>
@@ -9,6 +9,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { StateManager, ILog } from '@/services/StateManager';
+
+function scrollToBottom(id: string) {
+  const element = document.getElementById(id);
+  element!.scrollTop = element!.scrollHeight;
+}
 
 @Component<MyOrders>({
   mounted() {
@@ -19,7 +24,11 @@ import { StateManager, ILog } from '@/services/StateManager';
       // this.$set(this.cs, 'val', 'duuuude');
       this.state.val = 'duuuuuuude';
     });
+    scrollToBottom("console");
   },
+  updated() {
+    scrollToBottom("console");
+  }
 })
 export default class MyOrders extends Vue {
   private state = StateManager.GetInstance().GetState();
@@ -43,6 +52,11 @@ export default class MyOrders extends Vue {
 .console__item {
   padding-left: 20px;
   word-wrap: break-word;
+}
+
+.console__datetime {
+  font-weight: bold;
+  color: rgb(41, 189, 125);
 }
 
 </style>
