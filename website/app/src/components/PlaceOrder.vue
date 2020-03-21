@@ -116,7 +116,7 @@ export default class PlaceOrder extends Vue {
 .place-order {
   color: rgba(255, 255, 255, 0.753);
   font-weight: bold;
-  height: calc(100% - 40px);
+  height: calc(50vh - 30px);
 }
 
 .place-order div {

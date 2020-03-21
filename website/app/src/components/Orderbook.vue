@@ -1,7 +1,7 @@
 <template>
   <div class="orderbook">
     <div class="orderbook__list">
-      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders" v-bind:key="order.id">
+      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders.slice().reverse()" v-bind:key="order.id">
         <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">sells</span></span> 
         <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="orderbook__list">
-      <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders" v-bind:key="order.id">
+      <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders" v-bind:key="order.id" v-on:click="clickedOrder(order)">
         <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">buys</span></span> 
         <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
@@ -37,7 +37,7 @@ export default class Orderbook extends Vue {
 
   get buyOrders(): Order[] {
      const orderbook = ContractService.GetOrderbook(this.state);
-     return orderbook.buyOrders.reverse();
+     return orderbook.buyOrders;
   }
 
   get sellOrders(): Order[] {
@@ -59,6 +59,10 @@ export default class Orderbook extends Vue {
 
   public displayAddress(address: string) {
     return Helper.Utils.FormatAddressForDisplay(address);
+  }
+
+  public clickedOrder(order: Order) {
+    alert(order);
   }
 }
 </script>

@@ -2,8 +2,9 @@
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400&display=swap" rel="stylesheet">
     <div id="nav">
-      <router-link to="/">Dashboard</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Trade Flowcoin</router-link> |
+      <router-link to="/about">Get Flowcoin</router-link> |
+      <router-link to="/about">About this website</router-link>
     </div>
     <router-view/>
   </div>
@@ -19,20 +20,26 @@
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  padding: 5px;
+  padding-top: 0;
+  height: 20px;
+  color: #42b983;
+  font-size: 20px;
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
+  text-decoration: none;
   color: #42b983;
 }
 
+#nav a.router-link-exact-active {
+  color: #41D8E8;
+  text-decoration: underline;
+}
+
 html,body {
-  padding: 10px;
+  padding: 5px;
   background-color: #313132;
 }
 </style>
