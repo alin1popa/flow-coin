@@ -18,6 +18,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-top: 10px;
 }
 #nav {
   padding: 5px;
@@ -39,7 +40,8 @@
 }
 
 html,body {
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: #313132;
 }
 </style>

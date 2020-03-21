@@ -36,6 +36,8 @@ export default class MyOrders extends Vue {
   text-align: left;
   font-size: 12px;
   color: #5498FF;
+  height: calc(100% - 40px);
+  overflow-y: auto;
 }
 
 .console__item {

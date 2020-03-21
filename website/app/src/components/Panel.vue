@@ -2,7 +2,9 @@
   <div class="panel" :style="style">
     <div class="panel__wrapper">
     <h1>{{ title }}</h1>
+    <span class="panel__content">
       <slot>Content</slot>
+    </span>
     </div>
   </div>
 </template>
@@ -40,5 +42,7 @@ h1 {
   border-radius: 10px;
   padding-top: 10px;
   padding-bottom: 5px;
+}
+.panel__content {
 }
 </style>

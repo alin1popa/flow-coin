@@ -69,6 +69,7 @@ export default class MyOrders extends Vue {
 .myorders {
   color: #313132;
   height: calc(100% - 40px);
+  overflow-y: auto;
 }
 
 .myorders__list {
