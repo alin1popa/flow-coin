@@ -110,7 +110,7 @@
 [DONE]  Console design
 [DONE]  Format numbers in my orders
 [DONE]  Align columns in my orders
-        Redesign scrollbar https://css-tricks.com/custom-scrollbars-in-webkit/
+[DONE]  Redesign scrollbar https://css-tricks.com/custom-scrollbars-in-webkit/
 [DONE]  Set overflow auto on panels
 [DONE]  Small margin at left of addresses
 [DONE]  use other font for titles
@@ -120,3 +120,5 @@
 [DONE]  console - autoscroll to last position
         order - on click - see exact details in console
 [DONE]  navbar design
+        remove alert() when opening the page
+        fix tslint warnings
