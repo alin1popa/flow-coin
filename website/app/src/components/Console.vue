@@ -17,13 +17,6 @@ function scrollToBottom(id: string) {
 
 @Component<MyOrders>({
   mounted() {
-    const x = new Promise((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-    x.then(() => {
-      // this.$set(this.cs, 'val', 'duuuude');
-      this.state.val = 'duuuuuuude';
-    });
     scrollToBottom("console");
   },
   updated() {

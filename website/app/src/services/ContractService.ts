@@ -7,24 +7,20 @@ import { EthereumHelper } from '@/helpers/EthereumHelper';
 import { StateManager, IAppState } from '@/services/StateManager';
 import { ethers } from 'ethers';
 import { Utils } from '@/helpers/Utils';
+import { BigNumber } from 'ethers/utils';
 
 export class ContractService {
     /**
      * @description Gets current account's balance
      * @returns number
      */
-    public static GetBalance(): number {
-        // TODO
-        // https://github.com/ethers-io/ethers.js/issues/308
-
+    public static UpdateBalance(): void {
         const state = StateManager.GetInstance().GetState();
-        // const contract = EthereumHelper.GetReadWriteContract(state.provider);
         const contract = state.contract;
+        const ownAddress = state.ownAddress;
 
-        contract.balanceOf('0x005E647155bCfd6BE6B6B158CF880909b3B51863')
-        .then((value: number) => alert(value));
-
-        return 420.68;
+        EthereumHelper.GetBalanceOfAccount(contract, ownAddress)
+            .then((value: BigNumber) => state.selfBalance = value);
     }
 
     /**
@@ -43,6 +39,16 @@ export class ContractService {
         const state = StateManager.GetInstance().GetState();
         const contract = state.contract;
         let tx;
+
+        if (request.requestType !== RequestType.RETRACT) {
+            Utils.LogText('Placing order to ' + request.orderType +
+                ' ' + request.quantity.toString() +
+                ' @ ' + (request.requestType === RequestType.REGULAR ? request.rate.toString() : 'market price'));
+        } else {
+            Utils.LogText('Placing order to retract ' +
+                ' ' + request.quantity.toString() +
+                ' @ ' + request.rate.toString());
+        }
 
         if (request.requestType === RequestType.REGULAR) {
             const weiAmount = request.rate;
@@ -81,7 +87,8 @@ export class ContractService {
         Utils.LogText(tx.hash);
 
         await tx.wait();
-        state.val = 'MINED'; // todo remove
+
+        Utils.LogText('Order mined');
     }
 
     /**

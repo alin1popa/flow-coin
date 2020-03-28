@@ -120,5 +120,7 @@
 [DONE]  console - autoscroll to last position
 [DONE]  order - on click - see exact details in console
 [DONE]  navbar design
-        remove alert() when opening the page
+[DONE]  remove alert() when opening the page
         fix tslint warnings
+[DONE]  display my balance
+[NOPE]  show balance in console

@@ -94,6 +94,13 @@ export class EthereumHelper {
     }
 
     /**
+     * @description Gets balance of account
+     */
+    public static GetBalanceOfAccount(contract: any, address: string) {
+        return contract.balanceOf(address);
+    }
+
+    /**
      * @description Gets event history on contract, from the 0th block up to maxBlock
      * @param provider contract provider
      * @param maxBlock the latest block to fetch events for

@@ -1,4 +1,5 @@
 import { Order } from '@/models/Order';
+import { BigNumber, bigNumberify } from 'ethers/utils';
 
 /**
  * @description Log object
@@ -13,7 +14,6 @@ export interface ILog {
  * @description State interface
  */
 export interface IAppState {
-    val: string;
     contract: any;
     provider: any;
     signer: any;
@@ -23,6 +23,7 @@ export interface IAppState {
     ownAddress: string;
     ownOrders: Order[];
     logs: ILog[];
+    selfBalance: BigNumber;
 }
 
 /**
@@ -40,7 +41,6 @@ export class StateManager {
     private static instance: StateManager;
 
     private state: IAppState = {
-        val: 'asdasd',
         contract: null,
         provider: null,
         signer: null,
@@ -50,6 +50,7 @@ export class StateManager {
         ownOrders: [],
         ownAddress: '',
         logs: [],
+        selfBalance: bigNumberify(0),
     };
 
     private constructor() {}

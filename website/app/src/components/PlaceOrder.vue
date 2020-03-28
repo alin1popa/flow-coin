@@ -1,6 +1,6 @@
 <template>
   <div class="place-order" v-bind:class="{'place-order--buy': isBuyOrder, 'place-order--sell': !isBuyOrder}">
-    <p>Current balance: {{ balance }}</p>
+    <p>Current balance: {{ balance }} FC</p>
 
     <div class="place-order__requesttype">
       <input type="radio" id="market" name="requesttype" v-model="isMarketPrice" value="market"/>
@@ -48,19 +48,13 @@ import { StateManager } from '@/services/StateManager';
 import { Request } from '@/models/Request';
 import { RequestType } from '../constants/RequestType';
 import { parseEther, bigNumberify } from 'ethers/utils';
+import * as Helper from '@/helpers/Utils';
 
 @Component<PlaceOrder>({
   mounted() {
-    const x = new Promise((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-    x.then(() => {
-      // this.$set(this.cs, 'val', 'duuuude');
-      this.state.val = 'duuuuuuude';
-    });
-  },
+    ContractService.UpdateBalance();
+  }
 })
-
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
   private amount: number = 1;
@@ -92,8 +86,8 @@ export default class PlaceOrder extends Vue {
     }
   }
 
-  get balance(): number {
-    return ContractService.GetBalance();
+  get balance(): string {
+    return this.state.selfBalance.toString();
   }
 
   public submitOrder() {
@@ -106,8 +100,14 @@ export default class PlaceOrder extends Vue {
       parseEther(this.ratio.toString()),
     );
 
-    ContractService.PlaceOrderRequest(request);
-    this.isLoading = false; // TODO this should be a .then()
+    ContractService.PlaceOrderRequest(request)
+      .catch(() => {
+        Helper.Utils.LogText('Order failed');
+      })
+      .finally(() => {
+        ContractService.UpdateBalance();
+        this.isLoading = false;
+      });
   }
 }
 </script>
@@ -177,6 +177,12 @@ export default class PlaceOrder extends Vue {
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+}
+
+.place-order__action:disabled {
+  cursor: not-allowed;
+  color: gray;
+  border: 1px solid gray;
 }
 
 </style>

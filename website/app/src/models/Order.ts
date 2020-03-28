@@ -10,7 +10,10 @@ export class Order {
     ) {}
 
     get id(): string {
-        return this.type + this.address + this.rate.toString() + this.quantity.toString();
+        return this.type +
+        this.address +
+        this.rate.toString() +
+        this.quantity.toString();
     }
 
     /**

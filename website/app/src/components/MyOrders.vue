@@ -23,28 +23,11 @@ import { utils } from 'ethers';
 import { BigNumber } from 'ethers/utils';
 import * as Helper from '@/helpers/Utils';
 
-@Component<MyOrders>({
-  mounted() {
-    const x = new Promise((resolve) => {
-      setTimeout(resolve, 3000);
-    });
-    x.then(() => {
-      // this.$set(this.cs, 'val', 'duuuude');
-      this.state.val = 'duuuuuuude';
-    });
-  },
-})
 export default class MyOrders extends Vue {
-  private info: string = '';
-
   private state = StateManager.GetInstance().GetState();
 
-  get balance(): number {
-    return ContractService.GetBalance();
-  }
-
   get myorders(): Order[] {
-    return ContractService.GetActiveOrders(this.state);
+    return this.state.ownOrders;
   }
 
   public rateUnit(rate: BigNumber) {
@@ -166,4 +149,11 @@ export default class MyOrders extends Vue {
 .myorders__item__rate {
   cursor: help;
 }
+
+.myorders__item__action button:disabled {
+  cursor: not-allowed;
+  color: gray;
+  border: 1px solid gray;
+}
+
 </style>
