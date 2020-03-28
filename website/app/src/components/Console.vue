@@ -9,19 +9,15 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { StateManager, ILog } from '@/services/StateManager';
-
-function scrollToBottom(id: string) {
-  const element = document.getElementById(id);
-  element!.scrollTop = element!.scrollHeight;
-}
+import * as Helper from '@/helpers/Utils';
 
 @Component<MyOrders>({
   mounted() {
-    scrollToBottom("console");
+    Helper.Utils.scrollToBottom('console');
   },
   updated() {
-    scrollToBottom("console");
-  }
+    Helper.Utils.scrollToBottom('console');
+  },
 })
 export default class MyOrders extends Vue {
   private state = StateManager.GetInstance().GetState();

@@ -121,6 +121,6 @@
 [DONE]  order - on click - see exact details in console
 [DONE]  navbar design
 [DONE]  remove alert() when opening the page
-        fix tslint warnings
+[DONE]  fix tslint warnings
 [DONE]  display my balance
 [NOPE]  show balance in console

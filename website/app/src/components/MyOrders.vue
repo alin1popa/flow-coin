@@ -47,7 +47,7 @@ export default class MyOrders extends Vue {
   }
 
   public showInConsole(prefix: string, object: any) {
-    Helper.Utils.LogText("Info: " + prefix + object.toString());
+    Helper.Utils.LogText('Info: ' + prefix + object.toString());
   }
 }
 </script>

@@ -53,13 +53,13 @@ import * as Helper from '@/helpers/Utils';
 @Component<PlaceOrder>({
   mounted() {
     ContractService.UpdateBalance();
-  }
+  },
 })
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
   private amount: number = 1;
-  private isBuyOrder: string = "buy";
-  private isMarketPrice: string = "market";
+  private isBuyOrder: string = 'buy';
+  private isMarketPrice: string = 'market';
   private isLoading: boolean = false;
 
   private info: string = '';

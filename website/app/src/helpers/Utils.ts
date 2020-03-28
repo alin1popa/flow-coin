@@ -86,4 +86,9 @@ export class Utils {
         // tslint:disable-next-line:no-console
         console.log(text);
     }
+
+    public static scrollToBottom(id: string) {
+      const element = document.getElementById(id);
+      element!.scrollTop = element!.scrollHeight;
+    }
 }

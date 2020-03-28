@@ -28,21 +28,16 @@ import { OrderType } from '@/constants/OrderType';
 import { ContractService } from '@/services/ContractService';
 import { StateManager } from '@/services/StateManager';
 import { BigNumber } from 'ethers/utils';
-import * as Helper from '@/helpers/Utils'; 
+import * as Helper from '@/helpers/Utils';
 import { utils } from 'ethers';
-
-function scrollToBottom(id: string) {
-  const element = document.getElementById(id);
-  element!.scrollTop = element!.scrollHeight;
-}
 
 @Component<Orderbook>({
   mounted() {
-    scrollToBottom("sellorders");
+    Helper.Utils.scrollToBottom('sellorders');
   },
   updated() {
-    scrollToBottom("sellorders");
-  }
+    Helper.Utils.scrollToBottom('sellorders');
+  },
 })
 @Component
 export default class Orderbook extends Vue {
@@ -75,7 +70,7 @@ export default class Orderbook extends Vue {
   }
 
   public showInConsole(prefix: string, object: any) {
-    Helper.Utils.LogText("Info: " + prefix + object.toString());
+    Helper.Utils.LogText('Info: ' + prefix + object.toString());
   }
 }
 </script>
