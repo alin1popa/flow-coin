@@ -3,8 +3,8 @@
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
         <span class="myorders__item__type"><span class="myorders__item__typelabel">{{ order.type === "buy" ? "buy" : "sell" }}</span></span> 
-        <span class="myorders__item__quantity"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
-        <span class="myorders__item__rate"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="myorders__item__quantity" v-on:click="showInConsole('quantity in FC - ', order.quantity)"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
+        <span class="myorders__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
         <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
       </div>
     </div>
@@ -61,6 +61,10 @@ export default class MyOrders extends Vue {
 
   public actionClicked(order: Order) {
     ContractService.RetractOrder(order);
+  }
+
+  public showInConsole(prefix: string, object: any) {
+    Helper.Utils.LogText("Info: " + prefix + object.toString());
   }
 }
 </script>
@@ -146,6 +150,7 @@ export default class MyOrders extends Vue {
   color: white;
   font-weight: bold;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .myorders__item__unit {
@@ -155,5 +160,10 @@ export default class MyOrders extends Vue {
 .myorders__item__number {
   display: block;
   width: 100%;
+}
+
+.myorders__item__quantity,
+.myorders__item__rate {
+  cursor: help;
 }
 </style>

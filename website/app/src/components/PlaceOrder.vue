@@ -176,6 +176,7 @@ export default class PlaceOrder extends Vue {
   color: white;
   font-weight: bold;
   font-size: 14px;
+  cursor: pointer;
 }
 
 </style>

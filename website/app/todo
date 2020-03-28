@@ -49,7 +49,7 @@
 [DONE]  Orderbook - lib - sort orders by rate
 [DONE]  Orderbook - display - half screen buy, half screen sell
 [DONE]  Orderbook - display - set scroll on both sides
-        Orderbook - display - pre-set scroll position to last on the buy side
+[DONE]  Orderbook - display - pre-set scroll position to last on the buy side
 [DONE]  Contract - interface for token generation with limit
 [DONE]  Contract - implement interface for token
 [DONE]  Contract - check syntax in remix
@@ -118,7 +118,7 @@
 [DONE]  orderbook - buy - only sort once, not in place
 [DONE]  orderbook - has different width than others
 [DONE]  console - autoscroll to last position
-        order - on click - see exact details in console
+[DONE]  order - on click - see exact details in console
 [DONE]  navbar design
         remove alert() when opening the page
         fix tslint warnings

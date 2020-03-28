@@ -1,20 +1,20 @@
 <template>
   <div class="orderbook">
-    <div class="orderbook__list">
-      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders.slice().reverse()" v-bind:key="order.id">
-        <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
+    <div class="orderbook__list" id="sellorders">
+      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders" v-bind:key="order.id">
+        <span class="orderbook__item__address" v-on:click="showInConsole('address - ', order.address)">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">sells</span></span> 
-        <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
-        <span class="orderbook__item__rate"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
 
     <div class="orderbook__list">
-      <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders" v-bind:key="order.id" v-on:click="clickedOrder(order)">
-        <span class="orderbook__item__address">{{ displayAddress(order.address) }} </span>
+      <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders.slice().reverse()" v-bind:key="order.id" v-on:click="clickedOrder(order)">
+        <span class="orderbook__item__address" v-on:click="showInConsole('address - ', order.address)">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">buys</span></span> 
-        <span class="orderbook__item__quantity"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
-        <span class="orderbook__item__rate"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
   </div>
@@ -31,6 +31,19 @@ import { BigNumber } from 'ethers/utils';
 import * as Helper from '@/helpers/Utils'; 
 import { utils } from 'ethers';
 
+function scrollToBottom(id: string) {
+  const element = document.getElementById(id);
+  element!.scrollTop = element!.scrollHeight;
+}
+
+@Component<Orderbook>({
+  mounted() {
+    scrollToBottom("sellorders");
+  },
+  updated() {
+    scrollToBottom("sellorders");
+  }
+})
 @Component
 export default class Orderbook extends Vue {
   private state = StateManager.GetInstance().GetState();
@@ -61,8 +74,8 @@ export default class Orderbook extends Vue {
     return Helper.Utils.FormatAddressForDisplay(address);
   }
 
-  public clickedOrder(order: Order) {
-    alert(order);
+  public showInConsole(prefix: string, object: any) {
+    Helper.Utils.LogText("Info: " + prefix + object.toString());
   }
 }
 </script>
@@ -153,5 +166,11 @@ export default class Orderbook extends Vue {
 .orderbook__item__number {
   display: block;
   width: 100%;
+}
+
+.orderbook__item__address,
+.orderbook__item__quantity,
+.orderbook__item__rate {
+  cursor: help;
 }
 </style>
