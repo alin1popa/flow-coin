@@ -43,7 +43,9 @@ export class ContractService {
         if (request.requestType !== RequestType.RETRACT) {
             Utils.LogText('Placing order to ' + request.orderType +
                 ' ' + request.quantity.toString() +
-                ' @ ' + (request.requestType === RequestType.REGULAR ? request.rate.toString() : 'market price'));
+                ' @ ' + (request.requestType === RequestType.REGULAR
+                    ? (request.rate.toString() + ' wei')
+                    : 'market price'));
         } else {
             Utils.LogText('Placing order to retract ' +
                 ' ' + request.quantity.toString() +

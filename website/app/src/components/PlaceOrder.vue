@@ -25,6 +25,13 @@
       <div v-if=!isMarketPrice class="place-order__group">
         <label for="price">Price:</label>
         <input id="price" type="number" name="ratio" v-model="ratio"/>
+        <select id="unit" name="unit" v-model="unit">
+          <option value="wei">wei</option>
+          <option value="kwei">kwei</option>
+          <option value="mwei">mwei</option>
+          <option value="gwei">gwei</option>
+          <option value="ether">ether</option>
+        </select>
       </div>
 
       <div class="place-order__group">
@@ -47,7 +54,7 @@ import { ContractService } from '@/services/ContractService';
 import { StateManager } from '@/services/StateManager';
 import { Request } from '@/models/Request';
 import { RequestType } from '../constants/RequestType';
-import { parseEther, bigNumberify } from 'ethers/utils';
+import { parseUnits, bigNumberify } from 'ethers/utils';
 import * as Helper from '@/helpers/Utils';
 
 @Component<PlaceOrder>({
@@ -57,9 +64,10 @@ import * as Helper from '@/helpers/Utils';
 })
 export default class PlaceOrder extends Vue {
   private ratio: number = 1;
+  private unit: string = 'wei';
   private amount: number = 1;
   private isBuyOrder: string = 'buy';
-  private isMarketPrice: string = 'market';
+  private isMarketPrice: string = '';
   private isLoading: boolean = false;
 
   private info: string = '';
@@ -78,7 +86,7 @@ export default class PlaceOrder extends Vue {
     if (!this.isMarketPrice) {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
-        } ${this.amount}x FC at ${this.ratio} ethers each`;
+        } ${this.amount}x FC for ${this.ratio} ${this.unit} each`;
     } else {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
@@ -97,7 +105,7 @@ export default class PlaceOrder extends Vue {
       this.isBuyOrder ? OrderType.BUY : OrderType.SELL,
       this.isMarketPrice ? RequestType.MARKET : RequestType.REGULAR,
       bigNumberify(this.amount.toString()),
-      parseEther(this.ratio.toString()),
+      parseUnits(this.ratio.toString(), this.unit),
     );
 
     ContractService.PlaceOrderRequest(request)
@@ -127,10 +135,6 @@ export default class PlaceOrder extends Vue {
   width: 80px;
   display: inline-block;
   text-align: left;
-}
-
-.place-order__fields input {
-  width: 100px;
 }
 
 .place-order__group {
@@ -183,6 +187,20 @@ export default class PlaceOrder extends Vue {
   cursor: not-allowed;
   color: gray;
   border: 1px solid gray;
+}
+
+#amount {
+  width: 180px;
+}
+
+#price {
+  width: 100px;
+}
+
+#unit {
+  width: 70px;
+  margin-left: 10px;
+  height: 21px;
 }
 
 </style>
