@@ -183,6 +183,11 @@ export default class PlaceOrder extends Vue {
   cursor: pointer;
 }
 
+.place-order__action:hover {
+  border: 1px solid rgb(200, 200, 200);
+  color: rgb(200, 200, 200);
+}
+
 .place-order__action:disabled {
   cursor: not-allowed;
   color: gray;

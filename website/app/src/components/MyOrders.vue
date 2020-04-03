@@ -136,6 +136,11 @@ export default class MyOrders extends Vue {
   cursor: pointer;
 }
 
+.myorders__item button:hover {
+  border: 1px solid rgb(200, 200, 200);
+  color: rgb(200, 200, 200);
+}
+
 .myorders__item__unit {
   font-size: 11px;
 }

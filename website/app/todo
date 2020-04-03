@@ -32,7 +32,7 @@
 [DONE]  Add navbar
 [DONE]  Navbar - menu
 [NOPE]  Navbar - show balance
-        Navbar - show GetFC/GenerateFC buttons
+[DONE]  Navbar - show GetFC/GenerateFC buttons
         Contract - create GenerateFC function
 [DONE]  Display - my balance
 [DONE]  Display - 1x my orders
@@ -43,7 +43,7 @@
 [DONE]  Display - all orders from orderbook
 [NOPE]  Display - price history
 [DONE]  Display - console log
-        Other pages
+[DONE]  Other pages
 [DONE]  Create TODO list
 [DONE]  Orderbook - lib - group buy orders and sell orders
 [DONE]  Orderbook - lib - sort orders by rate

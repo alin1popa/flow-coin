@@ -3,7 +3,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:400&display=swap" rel="stylesheet">
     <div id="nav">
       <router-link to="/">Trade Flowcoin</router-link> |
-      <router-link to="/about">Get Flowcoin</router-link> |
+      <router-link to="/generate">Get Flowcoin</router-link> |
       <router-link to="/about">About this website</router-link>
     </div>
     <router-view/>

@@ -24,6 +24,16 @@ export class ContractService {
     }
 
     /**
+     * @description Generates tokens for the user
+     */
+    public static Generate(): void {
+        const state = StateManager.GetInstance().GetState();
+        const contract = state.contract;
+        
+        
+    }
+
+    /**
      * @description Gets current account's active orders
      * @returns Order[]
      */
