@@ -33,7 +33,7 @@
 [DONE]  Navbar - menu
 [NOPE]  Navbar - show balance
 [DONE]  Navbar - show GetFC/GenerateFC buttons
-        Contract - create GenerateFC function
+[DONE]  Contract - create GenerateFC function
 [DONE]  Display - my balance
 [DONE]  Display - 1x my orders
 [DONE]  Display - my active orders
@@ -125,3 +125,4 @@
 [DONE]  display my balance
 [NOPE]  show balance in console
         make market order work
+        display FC with 4 decimals everywhere

@@ -26,11 +26,30 @@ export class ContractService {
     /**
      * @description Generates tokens for the user
      */
-    public static Generate(): void {
+    public static async Generate() {
         const state = StateManager.GetInstance().GetState();
         const contract = state.contract;
-        
-        
+
+        const tx = await contract.generateToken();
+
+        Utils.LogText('Generate order placed; transaction hash:');
+        Utils.LogText(tx.hash);
+
+        await tx.wait();
+
+        Utils.LogText('Token generated');
+
+        this.UpdateBalance();
+        this.UpdateTotalSupply();
+    }
+
+    public static UpdateTotalSupply(): void {
+        const state = StateManager.GetInstance().GetState();
+        const contract = state.contract;
+        contract.totalSupply()
+            .then((value: BigNumber) => state.totalSupply = value.toNumber() / 10000);
+        contract.supplyLimit()
+            .then((value: BigNumber) => state.supplyLimit = value.toNumber() / 10000);
     }
 
     /**

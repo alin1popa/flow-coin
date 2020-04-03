@@ -70,8 +70,6 @@ export default class PlaceOrder extends Vue {
   private isMarketPrice: string = '';
   private isLoading: boolean = false;
 
-  private info: string = '';
-
   private state = StateManager.GetInstance().GetState();
 
   get orderTitle(): string {

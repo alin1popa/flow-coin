@@ -24,6 +24,8 @@ export interface IAppState {
     ownOrders: Order[];
     logs: ILog[];
     selfBalance: BigNumber;
+    totalSupply: number;
+    supplyLimit: number;
 }
 
 /**
@@ -51,6 +53,8 @@ export class StateManager {
         ownAddress: '',
         logs: [],
         selfBalance: bigNumberify(0),
+        totalSupply: 0,
+        supplyLimit: 0,
     };
 
     private constructor() {}
