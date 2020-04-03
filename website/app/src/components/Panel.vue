@@ -1,7 +1,7 @@
 <template>
   <div class="panel" :style="style">
     <div class="panel__wrapper">
-    <h1>{{ title }}</h1>
+    <h1 :style="title_style">{{ title }}</h1>
     <span class="panel__content">
       <slot>Content</slot>
     </span>
@@ -16,8 +16,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class Panel extends Vue {
   @Prop() private color!: string;
   @Prop() private title!: string;
+  @Prop() private margin!: string;
   get style() {
     return `background-color: ${this.color}`;
+  }
+  get title_style() {
+    return `margin-top: ${this.margin}`;
   }
 }
 
@@ -28,6 +32,8 @@ export default class Panel extends Vue {
 h1 {
   margin: 0;
   height: 40px;
+  font-size: 28px;
+  line-height: 30px;
   color: #41D8E8;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
