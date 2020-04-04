@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="logo-1.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4527">
+      <stop
+         style="stop-color:#41d8e8;stop-opacity:1"
+         offset="0"
+         id="stop4523" />
+      <stop
+         style="stop-color:#47ffae;stop-opacity:1"
+         offset="1"
+         id="stop4525" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4527"
+       id="linearGradient4529"
+       x1="38.539929"
+       y1="106.84303"
+       x2="178.7596"
+       y2="106.84303"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0.26727849,17.907052)" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="426.47692"
+     inkscape:cy="720.19382"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#2c3e50;fill-opacity:1;stroke:#b63dff;stroke-width:3.57945418;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.94974874"
+       id="rect826"
+       width="158.61284"
+       height="158.61284"
+       x="29.610626"
+       y="45.443657"
+       inkscape:export-xdpi="50"
+       inkscape:export-ydpi="50" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:126.88665771px;line-height:1.25;font-family:'Open Sans ExtraBold';-inkscape-font-specification:'Open Sans ExtraBold, ';letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4529);fill-opacity:1;stroke:#b63dff;stroke-width:3.96875;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.94974874"
+       x="30.604187"
+       y="170.07115"
+       id="text4520"
+       inkscape:export-xdpi="50"
+       inkscape:export-ydpi="50"><tspan
+         sodipodi:role="line"
+         id="tspan4518"
+         x="30.604187"
+         y="170.07115"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Open Sans ExtraBold';-inkscape-font-specification:'Open Sans ExtraBold, ';fill:url(#linearGradient4529);fill-opacity:1;stroke:#b63dff;stroke-width:3.96875;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.94974874">FC</tspan></text>
+  </g>
+</svg>
