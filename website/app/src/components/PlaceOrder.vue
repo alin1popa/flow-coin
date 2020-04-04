@@ -19,12 +19,12 @@
     <div class="place-order__fields">
       <div class="place-order__group">
         <label for="amount">Amount:</label>
-        <input id="amount" type="number" name="amount" v-model="amount"/>
+        <input id="amount" type="number" name="amount" min=1 v-model="amount"/>
       </div>
 
       <div v-if=!isMarketPrice class="place-order__group">
         <label for="price">Price:</label>
-        <input id="price" type="number" name="ratio" v-model="ratio"/>
+        <input id="price" type="number" name="ratio" min=1 v-model="ratio"/>
         <select id="unit" name="unit" v-model="unit">
           <option value="wei">wei</option>
           <option value="kwei">kwei</option>
@@ -84,7 +84,7 @@ export default class PlaceOrder extends Vue {
     if (!this.isMarketPrice) {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
-        } ${this.amount}x FC for ${this.ratio} ${this.unit} each`;
+        } ${this.amount / Math.pow(10, Helper.Utils.TOKEN_DECIMALS)}x FC for ${this.ratio} ${this.unit} per FC`;
     } else {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
@@ -93,12 +93,10 @@ export default class PlaceOrder extends Vue {
   }
 
   get balance(): string {
-    return this.state.selfBalance.toString();
+    return (this.state.selfBalance.toNumber() / Math.pow(10, Helper.Utils.TOKEN_DECIMALS)).toString();
   }
 
   public submitOrder() {
-    this.isLoading = true;
-
     const request = new Request(
       this.isBuyOrder ? OrderType.BUY : OrderType.SELL,
       this.isMarketPrice ? RequestType.MARKET : RequestType.REGULAR,
@@ -106,6 +104,7 @@ export default class PlaceOrder extends Vue {
       parseUnits(this.ratio.toString(), this.unit),
     );
 
+    this.isLoading = true;
     ContractService.PlaceOrderRequest(request)
       .catch(() => {
         Helper.Utils.LogText('Order failed');

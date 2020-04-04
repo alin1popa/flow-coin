@@ -43,13 +43,16 @@ export class ContractService {
         this.UpdateTotalSupply();
     }
 
+    /**
+     * @description Updates total supply and supply limit of token
+     */
     public static UpdateTotalSupply(): void {
         const state = StateManager.GetInstance().GetState();
         const contract = state.contract;
         contract.totalSupply()
-            .then((value: BigNumber) => state.totalSupply = value.toNumber() / 10000);
+            .then((value: BigNumber) => state.totalSupply = value.toNumber());
         contract.supplyLimit()
-            .then((value: BigNumber) => state.supplyLimit = value.toNumber() / 10000);
+            .then((value: BigNumber) => state.supplyLimit = value.toNumber());
     }
 
     /**

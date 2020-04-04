@@ -3,7 +3,7 @@
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
         <span class="myorders__item__type"><span class="myorders__item__typelabel">{{ order.type === "buy" ? "buy" : "sell" }}</span></span> 
-        <span class="myorders__item__quantity" v-on:click="showInConsole('quantity in FC - ', order.quantity)"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
+        <span class="myorders__item__quantity" v-on:click="showInConsole('quantity in FC (4 decimals) - ', order.quantity)"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
         <span class="myorders__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
         <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
       </div>

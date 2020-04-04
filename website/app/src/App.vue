@@ -4,7 +4,7 @@
     <div id="nav">
       <router-link to="/">Trade Flowcoin</router-link> |
       <router-link to="/generate">Get Flowcoin</router-link> |
-      <router-link to="/about">About this website</router-link>
+      <router-link to="/about">About this project</router-link>
     </div>
     <router-view/>
   </div>
@@ -24,14 +24,14 @@
   padding: 5px;
   padding-top: 0;
   height: 20px;
-  color: #42b983;
+  color: #47FFAE;
   font-size: 20px;
 }
 
 #nav a {
   font-weight: bold;
   text-decoration: none;
-  color: #42b983;
+  color: #47FFAE;
 }
 
 #nav a.router-link-exact-active {

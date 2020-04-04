@@ -4,6 +4,8 @@ import { BigNumber } from 'ethers/utils';
 import { IAppState, ILog, StateManager } from '@/services/StateManager';
 
 export class Utils {
+    public static TOKEN_DECIMALS = 4;
+
     public static OrderInsertOrUpdate(order: Order, array: Order[]) {
         let left = 0;
         let right = array.length;
@@ -67,12 +69,13 @@ export class Utils {
     }
 
     public static FormatFCCountForDisplay(count: BigNumber): string {
-        const str = count.toString();
-        if (str.length <= 6) {
+        let str = (count.toNumber() / Math.pow(10, this.TOKEN_DECIMALS)).toString();
+        if (str.length <= 7) {
             return str;
         }
 
-        return str[0] + '.' + str.slice(1, 3) + 'E+' + (str.length - 1).toString();
+        str = count.toNumber().toString();
+        return str[0] + '.' + str.slice(1, 3) + 'E+' + (str.length - 1 - this.TOKEN_DECIMALS).toString();
     }
 
     public static LogText(text: string) {

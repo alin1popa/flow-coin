@@ -50,6 +50,7 @@ export class EventListener {
     private AddOrderToOwnOrdersIfNecessary(order: Order, state: IAppState) {
         if (order.address === state.ownAddress) {
             Utils.OrderInsertOrUpdate(order, state.ownOrders);
+            state.ownOrders = state.ownOrders.slice(0);
         }
     }
 

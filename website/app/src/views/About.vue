@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <Panel title="Flowcoin" class="panel" margin="10px">
+    <Panel title="Description" class="panel" margin="10px">
       <p>
         Flowcoin is a <a href="https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC20">standard ERC-20 token</a> with a built-in <a href="https://en.wikipedia.org/wiki/Decentralized_exchange">decentralized exchange</a> directly in the <a href="https://github.com/ethereum/wiki/wiki/White-Paper">smart contract</a>.
       </p>
