@@ -4,9 +4,9 @@
       <p>
         Click the button below to generate 1x FC to your account.
         <br/><br/>
-        Note: The flowcoins are generated free of charge but you will pay the transaction costs.You can click the button any number of times. 
+        Note: The flowcoins are generated free of charge, you will only pay the transaction mining cost.You can click the button any number of times. 
         
-        Flowcoin is available to be generated in a maximum quantity of <span class="number">{{supplyLimit}}</span> items. Currently, there are <span class="number">{{totalSupply}}/{{supplyLimit}}</span> tokens already generated. When all tokens will be generated, the button below will stop working. 
+        Flowcoin is available to be generated in a maximum quantity of <span class="number">{{supplyLimit}}</span> tokens. Currently, there are <span class="number">{{totalSupply}}/{{supplyLimit}}</span> tokens already generated. When all tokens will be generated, the button below will stop working. 
 
         <br/><br/>
         If the transaction fails, try activating advanced gas settings in Metamask; then make sure that you set up a gas price higher than 0 when signing the transaction.
