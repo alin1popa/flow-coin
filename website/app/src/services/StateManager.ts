@@ -26,6 +26,7 @@ export interface IAppState {
     selfBalance: BigNumber;
     totalSupply: number;
     supplyLimit: number;
+    metamaskNotFound: boolean;
 }
 
 /**
@@ -55,6 +56,7 @@ export class StateManager {
         selfBalance: bigNumberify(0),
         totalSupply: 0,
         supplyLimit: 0,
+        metamaskNotFound: false,
     };
 
     private constructor() {}

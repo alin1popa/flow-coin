@@ -54,10 +54,10 @@ export class EthereumHelper {
         } else if (windowWithInjectedProvider.web3 !== undefined) {
             injectedProvider = windowWithInjectedProvider.web3.currentProvider;
         } else {
-            // TODO throw error
-
             Utils.LogText('ERROR: Injected Web3 not found');
             Utils.LogText('Please install MetaMask and allow the dApp to interact with your address.');
+
+            throw new Error('METAMASK_NOT_FOUND');
         }
 
         const provider = new ethers.providers.Web3Provider(injectedProvider);

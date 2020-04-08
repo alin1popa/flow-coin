@@ -47,6 +47,9 @@ export class Loader {
             state.appLoaded = true;
         } catch (e) {
             Utils.LogText(e);
+            if (e.message === 'METAMASK_NOT_FOUND' || e.message.startsWith('unknown account')) {
+                state.metamaskNotFound = true;
+            }
         }
     }
 }

@@ -69,7 +69,7 @@
 [DONE]  State manager - plan listeners for ethereum events
         Check contract if require() deletes all your gas
         Fix require if it deletes all your gas
-        Metamask fix warning network reload
+[NOPE]  Metamask fix warning network reload
 [DONE]  EthHelper get latest block B
 [DONE]  EthHelper get event history up to B (event logs)
 [DONE]  EthHelper get event type by its topic
@@ -92,7 +92,7 @@
 [DONE]  Loader - setup contract in state
 [DONE]  Loader - setup event listener
 [DONE]  Loader - wait for all loaded
-        Loader - what happens when it can't get injected provider => must error
+[DONE]  Loader - what happens when it can't get injected provider => must error
 [DONE]  EventListener - process buy event
 [DONE]  EventListener - process sell event
 [DONE]  Create state arrays buy/sell orders
@@ -131,4 +131,4 @@
 [DONE]  create icon
         rename from flowcoin??
 [DONE]  please allow metamask connection png
-        please allow metamask connection screen
+[DONE]  please allow metamask connection screen
