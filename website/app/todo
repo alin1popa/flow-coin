@@ -124,7 +124,7 @@
 [DONE]  fix tslint warnings
 [DONE]  display my balance
 [NOPE]  show balance in console
-        make market order work
+[DONE]  make market order work
 [DONE]  display FC with 4 decimals everywhere
 [DONE]  app title in window
 [DONE]  app icon in window
@@ -132,3 +132,6 @@
         rename from flowcoin??
 [DONE]  please allow metamask connection png
 [DONE]  please allow metamask connection screen
+        rates in FC must be in FC => .mul with decimals
+        place order in FC and in fc/price => min price == decimals*1wei
+        place order in FC and in fc/price => div decimals when placing, not when showing

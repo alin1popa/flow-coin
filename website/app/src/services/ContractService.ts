@@ -9,6 +9,13 @@ import { ethers } from 'ethers';
 import { Utils } from '@/helpers/Utils';
 import { BigNumber } from 'ethers/utils';
 
+function convertJSOrderModelToETHOrderModel(order: Order) {
+    return {
+        _ratio: order.rate,
+        _author: order.address,
+    };
+}
+
 export class ContractService {
     /**
      * @description Gets current account's balance
@@ -97,15 +104,22 @@ export class ContractService {
             }
         } else if (request.requestType === RequestType.MARKET) {
             if (request.orderType === OrderType.BUY) {
-                const orderList: any[] = []; // TODO
-                const maxPayment = ethers.utils.parseEther('0.05'); // TODO
+                const orderList: Order[] = Utils.GetBestOrdersList(state.sellOrders, request.quantity);
+                const maxPayment = Utils.EstimateMaxCost(orderList.slice().reverse(), request.quantity);
                 const overrides = {
                     value: maxPayment,
                 };
-                tx = await contract.buyFlow(request.quantity, orderList, overrides);
+                tx = await contract.buyFlow(
+                    request.quantity,
+                    orderList.map(convertJSOrderModelToETHOrderModel),
+                    overrides,
+                );
             } else {
-                const orderList: any[] = []; // TODO
-                tx = await contract.sellFlow(request.quantity, orderList);
+                const orderList: Order[] = Utils.GetBestOrdersList(state.buyOrders, request.quantity, true);
+                tx = await contract.sellFlow(
+                    request.quantity,
+                    orderList.map(convertJSOrderModelToETHOrderModel),
+                );
             }
         } else if (request.requestType === RequestType.RETRACT) {
             const weiAmount = request.rate;
@@ -148,17 +162,5 @@ export class ContractService {
             buyOrders: state.buyOrders,
             sellOrders: state.sellOrders,
         };
-    }
-
-    /**
-     * @description Gets settlement price for past transactions
-     * @returns PriceHistory
-     */
-    public static GetPriceHistory(): PriceHistory {
-        // TODO
-        return [
-            new PriceAtMoment(new Date(), 0.6, 20),
-            new PriceAtMoment(new Date(Date.now() - 24 * 60 * 60 * 1000), 0.5, 25),
-        ];
     }
 }

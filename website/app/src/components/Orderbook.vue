@@ -1,7 +1,7 @@
 <template>
   <div class="orderbook">
     <div class="orderbook__list" id="sellorders">
-      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders" v-bind:key="order.id">
+      <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders.slice().reverse()" v-bind:key="order.id">
         <span class="orderbook__item__address" v-on:click="showInConsole('address - ', order.address)">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">sells</span></span> 
         <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC (4 decimals) - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>

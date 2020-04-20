@@ -1,6 +1,6 @@
 import { Order } from '@/models/Order';
 import { utils } from 'ethers';
-import { BigNumber } from 'ethers/utils';
+import { BigNumber, bigNumberify } from 'ethers/utils';
 import { IAppState, ILog, StateManager } from '@/services/StateManager';
 
 export class Utils {
@@ -93,5 +93,45 @@ export class Utils {
     public static scrollToBottom(id: string) {
       const element = document.getElementById(id);
       element!.scrollTop = element!.scrollHeight;
+    }
+
+    public static GetBestOrdersList(orders: Order[], quantity: BigNumber, reverse: boolean = false): Order[] {
+        // reserve factor*(asked quantity) to make sure requester receives enough currency
+        const factor = 4;
+
+        let index = 0;
+        let totalQuantity = new BigNumber(0);
+        const listOfOrders = reverse ? orders.slice().reverse() : orders;
+
+        while (index < orders.length && totalQuantity.lt(quantity.mul(factor))) {
+            totalQuantity = totalQuantity.add(listOfOrders[index].quantity);
+            index++;
+        }
+
+        return listOfOrders.slice(0, index);
+    }
+
+    public static EstimateMaxCost(sortedOrders: Order[], quantity: BigNumber): BigNumber {
+        // TODO base cost
+        const baseCost = bigNumberify(0); // may not be needed
+        let totalCost = bigNumberify(0);
+
+        let totalQuantity = new BigNumber(quantity);
+        let currentQuantity = new BigNumber(0);
+        let index = 0;
+
+        while (totalQuantity.gt(0)) {
+            currentQuantity = new BigNumber(sortedOrders[index].quantity);
+            if (currentQuantity.gte(totalQuantity)) {
+                currentQuantity = new BigNumber(totalQuantity);
+            }
+
+            totalQuantity = totalQuantity.sub(currentQuantity);
+            totalCost = totalCost.add(currentQuantity.mul(sortedOrders[index].rate));
+
+            index++;
+        }
+
+        return totalCost.add(baseCost);
     }
 }

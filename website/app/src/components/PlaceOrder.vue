@@ -88,7 +88,7 @@ export default class PlaceOrder extends Vue {
     } else {
       return `I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
-        } ${this.amount}x FC at the best current market price`;
+        } ${this.amount / Math.pow(10, Helper.Utils.TOKEN_DECIMALS)}x FC at the best current market price`;
     }
   }
 
@@ -106,7 +106,8 @@ export default class PlaceOrder extends Vue {
 
     this.isLoading = true;
     ContractService.PlaceOrderRequest(request)
-      .catch(() => {
+      .catch((ex) => {
+        console.log(ex);
         Helper.Utils.LogText('Order failed');
       })
       .finally(() => {
