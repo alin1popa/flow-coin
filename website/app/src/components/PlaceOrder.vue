@@ -24,7 +24,7 @@
 
       <div v-if=!isMarketPrice class="place-order__group">
         <label for="price">Price:</label>
-        <input id="price" type="number" name="ratio" min=1 v-model="ratio"/>
+        <input id="price" type="number" name="ratio" v-bind:min="unit === 'wei' ? minimumPrice : 1" v-model="ratio"/>
         <select id="unit" name="unit" v-model="unit">
           <option value="wei">wei</option>
           <option value="kwei">kwei</option>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="place-order__group">
-        <span class="place-order__disclaimer">Your order: {{ disclaimerText }}</span>
+        <span class="place-order__disclaimer">{{ disclaimerText }}</span>
       </div>
 
       <div class="place-order__group">
@@ -63,7 +63,7 @@ import * as Helper from '@/helpers/Utils';
   },
 })
 export default class PlaceOrder extends Vue {
-  private ratio: number = 1;
+  private ratio: number = this.minimumPrice;
   private unit: string = 'wei';
   private amount: number = 1;
   private isBuyOrder: string = 'buy';
@@ -71,6 +71,10 @@ export default class PlaceOrder extends Vue {
   private isLoading: boolean = false;
 
   private state = StateManager.GetInstance().GetState();
+
+  get minimumPrice(): number {
+    return Helper.Utils.ComputeMinimumPrice();
+  }
 
   get orderTitle(): string {
     if (!this.isMarketPrice) {
@@ -80,15 +84,33 @@ export default class PlaceOrder extends Vue {
     }
   }
 
+  get error(): string | undefined {
+    let error;
+    if (this.amount < 0.0001) {
+      error = 'ERROR: Minimum number of FC is 0.0001';
+    } else if (!this.isMarketPrice) {
+      const value = parseUnits(this.ratio.toString(), this.unit);
+      if (value.lt(this.minimumPrice)) {
+        error = 'ERROR: Minimum price per FC is 10000 wei';
+      }
+    }
+
+    return error;
+  }
+
   get disclaimerText(): string {
+    if (this.error !== undefined) {
+      return this.error;
+    }
+
     if (!this.isMarketPrice) {
-      return `I want to ${
+      return `Your order: I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
-        } ${this.amount / Math.pow(10, Helper.Utils.TOKEN_DECIMALS)}x FC for ${this.ratio} ${this.unit} per FC`;
+        } ${this.amount}x FC for ${this.ratio} ${this.unit} per FC`;
     } else {
-      return `I want to ${
+      return `Your order: I want to ${
         this.isBuyOrder ? 'buy' : 'sell'
-        } ${this.amount / Math.pow(10, Helper.Utils.TOKEN_DECIMALS)}x FC at the best current market price`;
+        } ${this.amount}x FC at the best current market price`;
     }
   }
 
@@ -100,13 +122,14 @@ export default class PlaceOrder extends Vue {
     const request = new Request(
       this.isBuyOrder ? OrderType.BUY : OrderType.SELL,
       this.isMarketPrice ? RequestType.MARKET : RequestType.REGULAR,
-      bigNumberify(this.amount.toString()),
-      parseUnits(this.ratio.toString(), this.unit),
+      bigNumberify(this.amount.toString()).mul(this.minimumPrice),
+      parseUnits(this.ratio.toString(), this.unit).div(this.minimumPrice),
     );
 
     this.isLoading = true;
     ContractService.PlaceOrderRequest(request)
       .catch((ex) => {
+        // tslint:disable-next-line:no-console
         console.log(ex);
         Helper.Utils.LogText('Order failed');
       })

@@ -82,13 +82,13 @@ export class ContractService {
         if (request.requestType !== RequestType.RETRACT) {
             Utils.LogText('Placing order to ' + request.orderType +
                 ' ' + request.quantity.toString() +
-                ' @ ' + (request.requestType === RequestType.REGULAR
-                    ? (request.rate.toString() + ' wei')
+                ' FC fragments @ ' + (request.requestType === RequestType.REGULAR
+                    ? (request.rate.toString() + ' wei per fragment')
                     : 'market price'));
         } else {
             Utils.LogText('Placing order to retract ' +
                 ' ' + request.quantity.toString() +
-                ' @ ' + request.rate.toString());
+                ' FC fragments @ ' + request.rate.toString() + ' wei per fragment');
         }
 
         if (request.requestType === RequestType.REGULAR) {

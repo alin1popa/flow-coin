@@ -134,4 +134,12 @@ export class Utils {
 
         return totalCost.add(baseCost);
     }
+
+    public static PriceIncludingDecimals(price: BigNumber) {
+        return price.mul(Math.pow(10, this.TOKEN_DECIMALS));
+    }
+
+    public static ComputeMinimumPrice() {
+        return Math.pow(10, this.TOKEN_DECIMALS);
+    }
 }

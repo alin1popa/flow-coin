@@ -4,8 +4,8 @@
       <div class="orderbook__item orderbook__item--sell" v-for="order in sellOrders.slice().reverse()" v-bind:key="order.id">
         <span class="orderbook__item__address" v-on:click="showInConsole('address - ', order.address)">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">sells</span></span> 
-        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC (4 decimals) - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
-        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC fragments (4 decimals) - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC fragments - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
 
@@ -13,8 +13,8 @@
       <div class="orderbook__item orderbook__item--buy" v-for="order in buyOrders.slice().reverse()" v-bind:key="order.id" v-on:click="clickedOrder(order)">
         <span class="orderbook__item__address" v-on:click="showInConsole('address - ', order.address)">{{ displayAddress(order.address) }} </span>
         <span class="orderbook__item__type"><span class="orderbook__item__typelabel">buys</span></span> 
-        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC (4 decimals) - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
-        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="orderbook__item__quantity" v-on:click="showInConsole('quantity in FC fragments (4 decimals) - ', order.quantity)"><span class="orderbook__item__number">{{ displayQuantity(order.quantity) }}</span><span class="orderbook__item__unit">FC</span></span>
+        <span class="orderbook__item__rate" v-on:click="showInConsole('rate in wei/FC fragments - ', order.rate)"><span class="orderbook__item__number">{{ displayRate(order.rate) }} </span><span class="orderbook__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
       </div>
     </div>
   </div>
@@ -54,7 +54,8 @@ export default class Orderbook extends Vue {
   }
 
   public rateUnit(rate: BigNumber) {
-    return Helper.Utils.ComputeOptimalPriceUnit(rate);
+    const rateForDisplay = Helper.Utils.PriceIncludingDecimals(rate);
+    return Helper.Utils.ComputeOptimalPriceUnit(rateForDisplay);
   }
 
   public displayQuantity(quantity: BigNumber) {
@@ -62,7 +63,8 @@ export default class Orderbook extends Vue {
   }
 
   public displayRate(rate: BigNumber) {
-    return utils.formatUnits(rate, this.rateUnit(rate));
+    const rateForDisplay = Helper.Utils.PriceIncludingDecimals(rate);
+    return utils.formatUnits(rateForDisplay, this.rateUnit(rate));
   }
 
   public displayAddress(address: string) {

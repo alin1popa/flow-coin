@@ -3,8 +3,8 @@
     <div class="myorders__list">
       <div class="myorders__item" v-for="order in myorders" v-bind:key="order.id" v-bind:class="{'myorders__item--buy': (order.type === 'buy'), 'myorders__item--sell': (order.type === 'sell')}">
         <span class="myorders__item__type"><span class="myorders__item__typelabel">{{ order.type === "buy" ? "buy" : "sell" }}</span></span> 
-        <span class="myorders__item__quantity" v-on:click="showInConsole('quantity in FC (4 decimals) - ', order.quantity)"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
-        <span class="myorders__item__rate" v-on:click="showInConsole('rate in wei/FC - ', order.rate)"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
+        <span class="myorders__item__quantity" v-on:click="showInConsole('quantity in FC fragments (4 decimals) - ', order.quantity)"><span class="myorders__item__number">{{ displayQuantity(order.quantity) }}</span><span class="myorders__item__unit">FC</span></span>
+        <span class="myorders__item__rate" v-on:click="showInConsole('rate in wei/FC fragment - ', order.rate)"><span class="myorders__item__number">{{ displayRate(order.rate) }} </span><span class="myorders__item__unit">{{ rateUnit(order.rate) }} / FC</span></span>
         <span class="myorders__item__action"><button v-on:click="actionClicked(order)">Retract</button></span>
       </div>
     </div>
@@ -31,7 +31,8 @@ export default class MyOrders extends Vue {
   }
 
   public rateUnit(rate: BigNumber) {
-    return Helper.Utils.ComputeOptimalPriceUnit(rate);
+    const rateForDisplay = Helper.Utils.PriceIncludingDecimals(rate);
+    return Helper.Utils.ComputeOptimalPriceUnit(rateForDisplay);
   }
 
   public displayQuantity(quantity: BigNumber) {
@@ -39,7 +40,8 @@ export default class MyOrders extends Vue {
   }
 
   public displayRate(rate: BigNumber) {
-    return utils.formatUnits(rate, this.rateUnit(rate));
+    const rateForDisplay = Helper.Utils.PriceIncludingDecimals(rate);
+    return utils.formatUnits(rateForDisplay, this.rateUnit(rate));
   }
 
   public actionClicked(order: Order) {

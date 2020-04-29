@@ -67,8 +67,8 @@
 [DONE]  State manager - state component
 [DONE]  State manager - init in my orders
 [DONE]  State manager - plan listeners for ethereum events
-        Check contract if require() deletes all your gas
-        Fix require if it deletes all your gas
+[NOPE]  Check contract if require() deletes all your gas
+[NOPE]  Fix require if it deletes all your gas
 [NOPE]  Metamask fix warning network reload
 [DONE]  EthHelper get latest block B
 [DONE]  EthHelper get event history up to B (event logs)
@@ -129,9 +129,9 @@
 [DONE]  app title in window
 [DONE]  app icon in window
 [DONE]  create icon
-        rename from flowcoin??
+[NOPE]  rename from flowcoin??
 [DONE]  please allow metamask connection png
 [DONE]  please allow metamask connection screen
-        rates in FC must be in FC => .mul with decimals
-        place order in FC and in fc/price => min price == decimals*1wei
-        place order in FC and in fc/price => div decimals when placing, not when showing
+[DONE]  rates in FC must be in FC => .mul with decimals
+[DONE]  place order in FC and in fc/price => min price == decimals*1wei
+[DONE]  place order in FC and in fc/price => div decimals when placing, not when showing
