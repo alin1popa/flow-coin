@@ -4,7 +4,8 @@
     <div id="nav">
       <router-link to="/">Trade Flowcoin</router-link> |
       <router-link to="/generate">Get Flowcoin</router-link> |
-      <router-link to="/about">About this project</router-link>
+      <router-link to="/about">About this project</router-link> | 
+      <router-link to="/network">Switch network</router-link>
     </div>
     <router-view/>
   </div>

@@ -27,6 +27,7 @@ export interface IAppState {
     totalSupply: number;
     supplyLimit: number;
     metamaskNotFound: boolean;
+    contractAddress: string;
 }
 
 /**
@@ -57,11 +58,28 @@ export class StateManager {
         totalSupply: 0,
         supplyLimit: 0,
         metamaskNotFound: false,
+        contractAddress: '0x1988a16caa08e4908c15de8ff37e21aed2904c20',
     };
 
     private constructor() {}
 
     public GetState(): IAppState {
         return this.state;
+    }
+
+    public ResetState() {
+        this.state.contract = null;
+        this.state.provider = null;
+        this.state.signer = null;
+        this.state.appLoaded = false;
+        this.state.buyOrders = [];
+        this.state.sellOrders = [];
+        this.state.ownOrders = [];
+        this.state.ownAddress = '';
+        this.state.logs = [];
+        this.state.selfBalance = bigNumberify(0);
+        this.state.totalSupply = 0;
+        this.state.supplyLimit = 0;
+        this.state.metamaskNotFound = false;
     }
 }

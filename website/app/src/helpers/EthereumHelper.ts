@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { EventType } from '@/constants/EventType';
 import { Event } from '@/models/Event';
 import { Utils } from '@/helpers/Utils';
+import { IAppState, StateManager } from '@/services/StateManager';
 // tslint:disable-next-line
 const abi = require('@/assets/contract_abi.json');
 
@@ -27,7 +28,13 @@ interface IEthereumEvent {
 }
 
 export class EthereumHelper {
-    public static CONTRACT_ADDRESS = '0x1988a16caa08e4908c15de8ff37e21aed2904c20';
+    /**
+     * @description Returns the currently selected contract address
+     */
+    public static GetContractAddress() {
+        const state = StateManager.GetInstance().GetState();
+        return state.contractAddress;
+    }
 
     /**
      * @description Gets contract object from a read-only provider
@@ -35,7 +42,7 @@ export class EthereumHelper {
      */
     public static GetReadOnlyContract(network: string) {
         const provider = ethers.getDefaultProvider(network);
-        const contractAddress = this.CONTRACT_ADDRESS;
+        const contractAddress = this.GetContractAddress();
         const contract = new ethers.Contract(contractAddress, abi, provider);
 
         return contract;
@@ -87,7 +94,7 @@ export class EthereumHelper {
      * @description Gets read-write contract using specified signer
      */
     public static GetReadWriteContract(signer: any) {
-        const contractAddress = this.CONTRACT_ADDRESS;
+        const contractAddress = this.GetContractAddress();
         const contract = new ethers.Contract(contractAddress, abi, signer);
 
         return contract;
@@ -109,7 +116,7 @@ export class EthereumHelper {
         return await provider.getLogs({
             fromBlock: 0,
             toBlock: maxBlock,
-            address: this.CONTRACT_ADDRESS,
+            address: this.GetContractAddress(),
           });
     }
 
